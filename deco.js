@@ -74,6 +74,7 @@
     gear() { for (let i = 0; i < 6; i++) noise({ t: i * 0.06, dur: 0.04, vol: 0.3, filter: "bandpass", f0: 1800 - i * 150, q: 8 }); },
   };
 
+  window.RSA_PLAY = (n) => play(n);
   function play(name) {
     if (muted) return;
     try { (SOUNDS[name] || SOUNDS.click)(); } catch (e) {}

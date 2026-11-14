@@ -29,7 +29,6 @@
 
   const ch = data?.channel || {};
   if (ch.avatar) { const a = $("[data-avatar]"); a.src = ch.avatar; a.hidden = false; }
-  if (ch.subscribers) { const s = $("[data-subs]"); s.textContent = "👥 " + ch.subscribers; s.hidden = false; }
 
   const suffix = ch.id ? ch.id.slice(2) : null;
 
