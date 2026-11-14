@@ -28,7 +28,7 @@
   } catch (e) { /* data stays null */ }
 
   const ch = data?.channel || {};
-  if (ch.avatar) { const a = $("[data-avatar]"); a.src = ch.avatar; a.hidden = false; }
+  if (ch.avatar) document.querySelectorAll("[data-avatar]").forEach((a) => { a.src = ch.avatar; a.hidden = false; a.onerror = () => { a.hidden = true; }; });
 
   const suffix = ch.id ? ch.id.slice(2) : null;
 
@@ -63,21 +63,28 @@
     for (const v of recent) {
       const a = document.createElement("a");
       a.className = "mini";
+      a.setAttribute("data-reveal", "");
+      a.style.setProperty("--rd", (grid.children.length * 0.07).toFixed(2) + "s");
       a.href = v.type === "short" ? `https://www.youtube.com/shorts/${v.id}` : `https://www.youtube.com/watch?v=${v.id}`;
       a.target = "_blank";
       a.rel = "noopener";
+      const thumb = document.createElement("span");
+      thumb.className = "mini-thumb";
       const img = document.createElement("img");
       img.src = `https://i.ytimg.com/vi/${v.id}/mqdefault.jpg`;
       img.alt = "";
       img.loading = "lazy";
+      thumb.appendChild(img);
       const body = document.createElement("div");
+      body.className = "mini-body";
       body.textContent = v.title;
       const small = document.createElement("small");
       small.textContent = (v.type === "short" ? "⚡ Shorts · " : "🎬 Video · ") + fmtDate(v.published);
       body.appendChild(small);
-      a.append(img, body);
+      a.append(thumb, body);
       grid.appendChild(a);
     }
     $("[data-recent-wrap]").hidden = false;
+    document.dispatchEvent(new Event("rsa:content"));
   }
 })();

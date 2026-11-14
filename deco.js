@@ -200,9 +200,9 @@
   // Hero etrafı
   const hero = document.querySelector(".hero-art");
   if (hero) [
-    ["bug", { left: "-2%", top: "2%" }],
-    ["play", { left: "2%", bottom: "8%" }],
-    ["star", { right: "-2%", top: "46%" }],
+    ["bug", { left: "-34px", top: "-36px" }],
+    ["play", { left: "-22px", bottom: "26%" }],
+    ["star", { right: "-24px", top: "38%" }],
   ].forEach(([k, pos]) => hero.appendChild(makeDeco(k, "deco-hero", pos)));
 
   // Kenarlar (geniş ekranlarda)
