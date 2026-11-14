@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RS Animasyon</title>
+  <meta name="description" content="RS Animasyon — Roblox ve Roblox Studio videoları, rehberler ve Shorts.">
+  <meta property="og:title" content="RS Animasyon">
+  <meta property="og:description" content="Roblox ve Roblox Studio videoları, rehberler ve Shorts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='4' y='4' width='24' height='24' rx='4' fill='%23ff3b3b' transform='rotate(12 16 16)'/><rect x='12' y='12' width='8' height='8' fill='%23111'  transform='rotate(12 16 16)'/></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#">
+      <span class="brand-cube" aria-hidden="true"></span>
+      <span>RS Animasyon</span>
+    </a>
+    <nav>
+      <a href="#son-videolar">Son Videolar</a>
+      <a href="#icerik">İçerik</a>
+      <a class="btn btn-sm" data-channel-link href="https://www.youtube.com/@rsanimasyon?sub_confirmation=1" target="_blank" rel="noopener">Abone Ol</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Roblox &amp; Roblox Studio</p>
+        <h1>Oyna. Yap.<br><span class="accent">Öğren.</span></h1>
+        <p class="lead" data-channel-desc>
+          Roblox Studio rehberleri, oyun yapımı, script ipuçları ve eğlenceli Roblox videoları.
+          Yeni içerikleri kaçırma!
+        </p>
+        <div class="hero-actions">
+          <a class="btn" data-channel-link href="https://www.youtube.com/@rsanimasyon?sub_confirmation=1" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg>
+            YouTube'da Abone Ol
+          </a>
+          <a class="btn btn-ghost" href="#son-videolar">Son videoları izle ↓</a>
+        </div>
+        <p class="subs" data-subs hidden></p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="cube c1"></div>
+        <div class="cube c2"></div>
+        <div class="cube c3"></div>
+        <img class="avatar" data-avatar alt="" hidden>
+      </div>
+    </section>
+
+    <section id="son-videolar" class="latest">
+      <h2 class="section-title">Son Videolar</h2>
+      <div class="latest-grid">
+        <article class="card card-long">
+          <div class="card-head">
+            <span class="tag">🎬 Son Video</span>
+            <time data-long-date></time>
+          </div>
+          <div class="frame frame-16x9" data-long-frame>
+            <div class="placeholder">Son video yükleniyor…</div>
+          </div>
+          <h3 data-long-title></h3>
+        </article>
+
+        <article class="card card-short">
+          <div class="card-head">
+            <span class="tag tag-short">⚡ Son Shorts</span>
+            <time data-short-date></time>
+          </div>
+          <div class="frame frame-9x16" data-short-frame>
+            <div class="placeholder">Son Shorts yükleniyor…</div>
+          </div>
+          <h3 data-short-title></h3>
+        </article>
+      </div>
+
+      <div class="recent" data-recent-wrap hidden>
+        <h3 class="sub-title">Diğer yeni videolar</h3>
+        <div class="recent-grid" data-recent></div>
+      </div>
+    </section>
+
+    <section id="icerik" class="topics">
+      <h2 class="section-title">Kanalda neler var?</h2>
+      <div class="topic-grid">
+        <div class="topic"><span class="ico">🛠️</span><h3>Roblox Studio Rehberleri</h3><p>Sıfırdan oyun yapımı, harita tasarımı ve Studio araçları.</p></div>
+        <div class="topic"><span class="ico">📜</span><h3>Script &amp; Lua</h3><p>Kendi oyununa özellik eklemek için pratik kod ipuçları.</p></div>
+        <div class="topic"><span class="ico">🎮</span><h3>Roblox Oyunları</h3><p>Popüler oyunlar, denemeler ve eğlenceli anlar.</p></div>
+        <div class="topic"><span class="ico">⚡</span><h3>Shorts</h3><p>Kısa, hızlı ve işe yarar Roblox ipuçları.</p></div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Yeni videoları kaçırma!</h2>
+      <p>Abone ol ve bildirimleri aç 🔔</p>
+      <a class="btn btn-light" data-channel-link href="https://www.youtube.com/@rsanimasyon?sub_confirmation=1" target="_blank" rel="noopener">Abone Ol</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span data-year></span> RS Animasyon · <a href="https://www.youtube.com/@rsanimasyon" target="_blank" rel="noopener">youtube.com/@rsanimasyon</a></p>
+    <p class="fine">Bu site resmi bir Roblox Corporation sitesi değildir.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
