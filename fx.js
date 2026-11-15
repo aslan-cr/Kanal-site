@@ -94,8 +94,8 @@
   if (out) {
     let li = 0;
     const t0 = Date.now();
-    const push = () => {
-      const [cls, msg] = LOG[li++ % LOG.length];
+    const push = (custom) => {
+      const [cls, msg] = Array.isArray(custom) ? custom : LOG[li++ % LOG.length];
       const d = document.createElement("div");
       const sec = ((Date.now() - t0) / 1000).toFixed(1).padStart(5, "0");
       d.innerHTML = `<span class="t">00:${sec}</span>`;
@@ -107,7 +107,8 @@
       while (out.children.length > 5) out.firstChild.remove();
     };
     push(); push();
-    setInterval(push, reduce ? 4000 : 1900);
+    window.RSA_LOG = (cls, msg) => push([cls, msg]);
+    setInterval(() => push(), reduce ? 4000 : 2600);
   }
 
   /* ---------- Kayan şeritler ---------- */

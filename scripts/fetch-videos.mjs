@@ -27,20 +27,57 @@ function decode(s) {
   return s.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
 }
 
-async function latestFromPlaylist(playlistId) {
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// 1. yol: RSS akışı (izlenme sayısı da verir). YouTube bazen boş/hatalı döner, o yüzden tekrar dener.
+async function fromRss(playlistId) {
+  for (let i = 0; i < 3; i++) {
+    try {
+      const xml = await get(`https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`);
+      const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].map(([, e]) => ({
+        id: e.match(/<yt:videoId>([^<]+)/)?.[1],
+        title: decode(e.match(/<title>([^<]*)/)?.[1] || ""),
+        published: e.match(/<published>([^<]+)/)?.[1],
+        views: Number(e.match(/views="(\d+)"/)?.[1] || 0),
+      })).filter((v) => v.id);
+      if (entries.length) return entries;
+    } catch (err) {
+      console.warn(`RSS ${playlistId} (deneme ${i + 1}):`, err.message);
+    }
+    await sleep(2000 * (i + 1));
+  }
+  return [];
+}
+
+// 2. yol: YouTube Data API (config.js içindeki anahtarla)
+async function fromApi(playlistId) {
   try {
-    const xml = await get(`https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`);
-    const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].map(([, e]) => ({
-      id: e.match(/<yt:videoId>([^<]+)/)?.[1],
-      title: decode(e.match(/<title>([^<]*)/)?.[1] || ""),
-      published: e.match(/<published>([^<]+)/)?.[1],
-      views: Number(e.match(/views="(\d+)"/)?.[1] || 0),
-    }));
-    return entries.filter((v) => v.id);
+    const cfg = await readFile(new URL("../config.js", import.meta.url), "utf8");
+    const key = cfg.match(/youtubeApiKey:\s*"([^"]+)"/)?.[1];
+    if (!key) return [];
+    const res = await fetch(
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=10&playlistId=${playlistId}&key=${key}`,
+      { headers: { Referer: "https://aslan-cr.github.io/" } }
+    );
+    if (!res.ok) throw new Error(`API ${res.status}`);
+    const j = await res.json();
+    return (j.items || []).map((it) => ({
+      id: it.contentDetails?.videoId,
+      title: it.snippet?.title || "",
+      published: it.contentDetails?.videoPublishedAt || it.snippet?.publishedAt,
+      views: 0,
+    })).filter((v) => v.id);
   } catch (err) {
-    console.warn(`Playlist ${playlistId} okunamadı:`, err.message);
+    console.warn(`API ${playlistId}:`, err.message);
     return [];
   }
+}
+
+async function latestFromPlaylist(playlistId) {
+  const rss = await fromRss(playlistId);
+  if (rss.length) return rss;
+  const api = await fromApi(playlistId);
+  return api.sort((x, y) => new Date(y.published) - new Date(x.published));
 }
 
 const ch = await channelInfo();
@@ -59,6 +96,14 @@ const data = {
 
 let prev = "";
 try { prev = await readFile(OUT, "utf8"); } catch {}
+
+// YouTube boş döndüyse eldeki eski veriyi silme
+try {
+  const old = JSON.parse(prev);
+  if (!data.latestLong && old.latestLong) { data.latestLong = old.latestLong; console.warn("Uzun video listesi alınamadı, eskisi korundu."); }
+  if (!data.latestShort && old.latestShort) { data.latestShort = old.latestShort; console.warn("Shorts listesi alınamadı, eskisi korundu."); }
+  if (!data.recent.length && old.recent?.length) data.recent = old.recent;
+} catch {}
 const strip = (s) => s.replace(/"updated":\s*"[^"]*",?/, "");
 const next = JSON.stringify(data, null, 2) + "\n";
 if (strip(prev) === strip(next)) {

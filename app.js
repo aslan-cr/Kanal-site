@@ -17,6 +17,14 @@
     frame.appendChild(f);
   };
 
+  const addViews = (el, views) => {
+    if (!views) return;
+    const s = document.createElement("small");
+    s.className = "views";
+    s.textContent = "👀 " + views.toLocaleString("tr-TR") + " izlenme";
+    el.appendChild(s);
+  };
+
   const fallback = (frame, text, url) => {
     frame.innerHTML = `<div class="placeholder"><p>${text}<br><a href="${url}" target="_blank" rel="noopener">YouTube'da izle →</a></p></div>`;
   };
@@ -37,6 +45,7 @@
   if (data?.latestLong) {
     embed(longFrame, `https://www.youtube-nocookie.com/embed/${data.latestLong.id}`, data.latestLong.title);
     $("[data-long-title]").textContent = data.latestLong.title;
+    addViews($("[data-long-title]"), data.latestLong.views);
     $("[data-long-date]").textContent = fmtDate(data.latestLong.published);
   } else if (suffix) {
     embed(longFrame, `https://www.youtube-nocookie.com/embed/videoseries?list=UULF${suffix}`, "Son videolar");
@@ -49,6 +58,7 @@
   if (data?.latestShort) {
     embed(shortFrame, `https://www.youtube-nocookie.com/embed/${data.latestShort.id}`, data.latestShort.title);
     $("[data-short-title]").textContent = data.latestShort.title;
+    addViews($("[data-short-title]"), data.latestShort.views);
     $("[data-short-date]").textContent = fmtDate(data.latestShort.published);
   } else if (suffix) {
     embed(shortFrame, `https://www.youtube-nocookie.com/embed/videoseries?list=UUSH${suffix}`, "Son Shorts");
@@ -79,7 +89,7 @@
       body.className = "mini-body";
       body.textContent = v.title;
       const small = document.createElement("small");
-      small.textContent = (v.type === "short" ? "⚡ Shorts · " : "🎬 Video · ") + fmtDate(v.published);
+      small.textContent = (v.type === "short" ? "⚡ Shorts · " : "🎬 Video · ") + fmtDate(v.published) + (v.views ? " · " + v.views.toLocaleString("tr-TR") + " izlenme" : "");
       body.appendChild(small);
       a.append(thumb, body);
       grid.appendChild(a);
