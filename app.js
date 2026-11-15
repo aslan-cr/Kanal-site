@@ -17,13 +17,17 @@
     frame.appendChild(f);
   };
 
-  const addViews = (el, views) => {
-    if (!views) return;
-    const s = document.createElement("small");
-    s.className = "views";
-    s.textContent = "👀 " + views.toLocaleString("tr-TR") + " izlenme";
-    el.appendChild(s);
+  // İzlenme sayısı: subs.js bunları YouTube'dan canlı günceller (data-vid)
+  const viewsEl = (id, views, prefix) => {
+    const s = document.createElement(prefix ? "span" : "small");
+    if (!prefix) s.className = "views";
+    s.dataset.vid = id;
+    s.dataset.prefix = prefix || "👀 ";
+    s.dataset.views = views || 0;
+    if (views) s.textContent = s.dataset.prefix + views.toLocaleString("tr-TR") + " izlenme";
+    return s;
   };
+  const addViews = (el, v) => el.appendChild(viewsEl(v.id, v.views));
 
   const fallback = (frame, text, url) => {
     frame.innerHTML = `<div class="placeholder"><p>${text}<br><a href="${url}" target="_blank" rel="noopener">YouTube'da izle →</a></p></div>`;
@@ -45,7 +49,7 @@
   if (data?.latestLong) {
     embed(longFrame, `https://www.youtube-nocookie.com/embed/${data.latestLong.id}`, data.latestLong.title);
     $("[data-long-title]").textContent = data.latestLong.title;
-    addViews($("[data-long-title]"), data.latestLong.views);
+    addViews($("[data-long-title]"), data.latestLong);
     $("[data-long-date]").textContent = fmtDate(data.latestLong.published);
   } else if (suffix) {
     embed(longFrame, `https://www.youtube-nocookie.com/embed/videoseries?list=UULF${suffix}`, "Son videolar");
@@ -58,7 +62,7 @@
   if (data?.latestShort) {
     embed(shortFrame, `https://www.youtube-nocookie.com/embed/${data.latestShort.id}`, data.latestShort.title);
     $("[data-short-title]").textContent = data.latestShort.title;
-    addViews($("[data-short-title]"), data.latestShort.views);
+    addViews($("[data-short-title]"), data.latestShort);
     $("[data-short-date]").textContent = fmtDate(data.latestShort.published);
   } else if (suffix) {
     embed(shortFrame, `https://www.youtube-nocookie.com/embed/videoseries?list=UUSH${suffix}`, "Son Shorts");
@@ -89,7 +93,8 @@
       body.className = "mini-body";
       body.textContent = v.title;
       const small = document.createElement("small");
-      small.textContent = (v.type === "short" ? "⚡ Shorts · " : "🎬 Video · ") + fmtDate(v.published) + (v.views ? " · " + v.views.toLocaleString("tr-TR") + " izlenme" : "");
+      small.textContent = (v.type === "short" ? "⚡ Shorts · " : "🎬 Video · ") + fmtDate(v.published);
+      small.appendChild(viewsEl(v.id, v.views, " · "));
       body.appendChild(small);
       a.append(thumb, body);
       grid.appendChild(a);

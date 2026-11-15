@@ -124,7 +124,42 @@
     }
   }
 
-  refresh();
-  setInterval(refresh, Math.max(10, cfg.refreshSeconds || 30) * 1000);
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
+  // Videoların izlenme sayıları (sayfadaki tüm videolar tek istekte)
+  async function refreshVideos() {
+    if (document.hidden) return;
+    const els = Array.from(document.querySelectorAll("[data-vid]"));
+    const ids = [...new Set(els.map((e) => e.dataset.vid))].slice(0, 50);
+    if (!ids.length) return;
+    try {
+      const url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" +
+        ids.map(encodeURIComponent).join(",") + "&key=" + encodeURIComponent(cfg.youtubeApiKey);
+      const r = await fetch(url, { cache: "no-store" });
+      if (!r.ok) return;
+      const j = await r.json();
+      const map = {};
+      (j.items || []).forEach((it) => { map[it.id] = parseInt(it.statistics && it.statistics.viewCount, 10); });
+      els.forEach((el) => {
+        const next = map[el.dataset.vid];
+        if (next == null || isNaN(next)) return;
+        const prev = parseInt(el.dataset.views, 10) || 0;
+        if (next === prev && el.textContent) return;
+        el.dataset.views = next;
+        const pre = el.dataset.prefix || "";
+        if (reduce || !prev || next === prev) { el.textContent = pre + fmt(next) + " izlenme"; return; }
+        const start = performance.now();
+        (function step(t) {
+          const k = Math.min(1, (t - start) / 900);
+          el.textContent = pre + fmt(Math.round(prev + (next - prev) * k)) + " izlenme";
+          if (k < 1) requestAnimationFrame(step);
+        })(start);
+        if (next > prev) { el.classList.remove("views-up"); void el.offsetWidth; el.classList.add("views-up"); }
+      });
+    } catch (e) {}
+  }
+
+  const refreshAll = () => { refresh(); refreshVideos(); };
+  refreshAll();
+  setTimeout(refreshVideos, 2500); // video kartları geç çizildiyse
+  setInterval(refreshAll, Math.max(10, cfg.refreshSeconds || 30) * 1000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshAll(); });
 })();

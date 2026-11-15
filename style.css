@@ -606,3 +606,5 @@ section { padding: 56px 0; }
   .skyline { height: 80px; }
   .bug-hud, .mute-btn { height: 46px; }
 }
+.views-up { animation: views-flash 1.2s ease-out; }
+@keyframes views-flash { 0%, 40% { color: var(--green); } }
