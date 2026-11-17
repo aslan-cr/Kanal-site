@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T05:21:34.819Z",
+  "updated": "2026-11-17T07:41:39.460Z",
   "channel": {
     "id": "UC1xdj-jNuZqtPkqr76NSEuQ",
     "title": "RSAnimasyon",
@@ -9,16 +9,16 @@
     "handle": "rsanimasyon"
   },
   "latestLong": {
-    "id": "ycL3aTTmG0U",
-    "title": "Fikirlerinizle Roblox Oyunu Yapıyorum! 🐔🔥 (Deneme Bölümü) | Roblox Animasyon",
-    "published": "2026-11-16T14:00:31+00:00",
-    "views": 35
+    "id": "DWFpM0iUB2c",
+    "title": "Kızartmacıda Gece Vardiyası 🍟 Üçüncü Kuralı Bozdum | Roblox Hikayesi",
+    "published": "2026-11-17T06:00:08+00:00",
+    "views": 0
   },
   "latestShort": {
     "id": "Ix6i5mlZ3Mo",
     "title": "Her Adımda +1 Hız ⚡ Sonunda Ne Oldu? #roblox #shorts",
     "published": "2026-11-16T20:00:17+00:00",
-    "views": 978
+    "views": 979
   },
   "recent": [
     {
@@ -34,6 +34,13 @@
       "published": "2026-11-16T16:00:04+00:00",
       "views": 1207,
       "type": "short"
+    },
+    {
+      "id": "ycL3aTTmG0U",
+      "title": "Fikirlerinizle Roblox Oyunu Yapıyorum! 🐔🔥 (Deneme Bölümü) | Roblox Animasyon",
+      "published": "2026-11-16T14:00:31+00:00",
+      "views": 36,
+      "type": "long"
     },
     {
       "id": "25hqtTy58Pk",
@@ -54,13 +61,6 @@
       "title": "99 Gece – Bölüm 1: Ormanda İlk Gece 🔥 Ateş Sönerse... | Roblox Animasyon",
       "published": "2026-11-15T16:00:38+00:00",
       "views": 35,
-      "type": "long"
-    },
-    {
-      "id": "MdLDsk0RE7I",
-      "title": "Dorsa düştük ve Seek bizimle Arkadaş Oldu",
-      "published": "2026-11-07T10:45:34+00:00",
-      "views": 184,
       "type": "long"
     }
   ]
