@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18T21:11:54.882Z",
+  "updated": "2026-11-18T22:09:42.209Z",
   "channel": {
     "id": "UC1xdj-jNuZqtPkqr76NSEuQ",
     "title": "RSAnimasyon",
@@ -15,12 +15,19 @@
     "views": 63
   },
   "latestShort": {
-    "id": "yqJRNC5JGng",
-    "title": "Otobüs Şoförü Oldum 🚌 Teyze Yumurta Taşıyordu! #roblox #shorts",
-    "published": "2026-11-18T18:00:17+00:00",
-    "views": 288
+    "id": "6VWTDtdyp1c",
+    "title": "Fisch'te Efsanevi Altın Balığı Yakaladım 🐟 #roblox #shorts",
+    "published": "2026-11-18T20:00:06+00:00",
+    "views": 155
   },
   "recent": [
+    {
+      "id": "yqJRNC5JGng",
+      "title": "Otobüs Şoförü Oldum 🚌 Teyze Yumurta Taşıyordu! #roblox #shorts",
+      "published": "2026-11-18T18:00:17+00:00",
+      "views": 288,
+      "type": "short"
+    },
     {
       "id": "Ed_K8aIFwjs",
       "title": "Blox Fruits'te Yanlış Meyveyi Yedim 🦆 #roblox #shorts",
@@ -43,13 +50,6 @@
       "type": "short"
     },
     {
-      "id": "ZvOrAsCqx3k",
-      "title": "Kardeşim Hesabıma Girdi 😭 Ejderhamı Taşa Verdi! #roblox #shorts",
-      "published": "2026-11-18T08:00:22+00:00",
-      "views": 856,
-      "type": "short"
-    },
-    {
       "id": "DWFpM0iUB2c",
       "title": "Kızartmacıda Gece Vardiyası 🍟 Üçüncü Kuralı Bozdum | Roblox Hikayesi",
       "published": "2026-11-17T06:00:08+00:00",
@@ -60,7 +60,7 @@
       "id": "ycL3aTTmG0U",
       "title": "Fikirlerinizle Roblox Oyunu Yapıyorum! 🐔🔥 (Deneme Bölümü) | Roblox Animasyon",
       "published": "2026-11-16T14:00:31+00:00",
-      "views": 133,
+      "views": 137,
       "type": "long"
     }
   ]
