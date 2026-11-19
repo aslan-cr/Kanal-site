@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T08:36:03.316Z",
+  "updated": "2026-11-19T10:25:27.816Z",
   "channel": {
     "id": "UC1xdj-jNuZqtPkqr76NSEuQ",
     "title": "RSAnimasyon",
@@ -15,17 +15,24 @@
     "views": 0
   },
   "latestShort": {
-    "id": "613m6PxQ4p4",
-    "title": "Berberde İlk Günüm 💇 Müşterinin Saçı Gitti! #roblox #shorts",
-    "published": "2026-11-19T08:00:14+00:00",
-    "views": 3
+    "id": "tbtyALx_Oj0",
+    "title": "Rüya Evimi Yaptım Ama Merdiveni Unuttum 🏠 #roblox #shorts",
+    "published": "2026-11-19T10:00:01+00:00",
+    "views": 1
   },
   "recent": [
+    {
+      "id": "613m6PxQ4p4",
+      "title": "Berberde İlk Günüm 💇 Müşterinin Saçı Gitti! #roblox #shorts",
+      "published": "2026-11-19T08:00:14+00:00",
+      "views": 40,
+      "type": "short"
+    },
     {
       "id": "6VWTDtdyp1c",
       "title": "Fisch'te Efsanevi Altın Balığı Yakaladım 🐟 #roblox #shorts",
       "published": "2026-11-18T20:00:06+00:00",
-      "views": 232,
+      "views": 268,
       "type": "short"
     },
     {
@@ -39,28 +46,21 @@
       "id": "Ed_K8aIFwjs",
       "title": "Blox Fruits'te Yanlış Meyveyi Yedim 🦆 #roblox #shorts",
       "published": "2026-11-18T16:00:14+00:00",
-      "views": 259,
-      "type": "short"
-    },
-    {
-      "id": "4PygaAB2d5o",
-      "title": "Tsunamiyi Durdurmaya Çalıştım 🌊 #roblox #shorts",
-      "published": "2026-11-18T14:00:40+00:00",
-      "views": 465,
+      "views": 278,
       "type": "short"
     },
     {
       "id": "wvkklZyZHsE",
       "title": "Yeni Okul – Bölüm 1: Bodrumdaki ODA 404 🚪 | Roblox Dizisi",
       "published": "2026-11-18T06:00:07+00:00",
-      "views": 91,
+      "views": 92,
       "type": "long"
     },
     {
       "id": "DWFpM0iUB2c",
       "title": "Kızartmacıda Gece Vardiyası 🍟 Üçüncü Kuralı Bozdum | Roblox Hikayesi",
       "published": "2026-11-17T06:00:08+00:00",
-      "views": 440,
+      "views": 441,
       "type": "long"
     }
   ]
