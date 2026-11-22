@@ -12,9 +12,12 @@
           "uid": { ".validate": "newData.isString() && (data.exists() ? newData.val() == data.val() : newData.val() == auth.uid)" },
           "isim": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 100" },
           "metin": { ".validate": "newData.isString() && newData.val().length >= 5 && newData.val().length <= 200 && !newData.val().matches(/(https?:|www\\.)/i)" },
-          "begeni": {
-            ".write": "data.exists() && newData.isNumber() && newData.val() == data.val() + 1",
-            ".validate": "newData.isNumber() && newData.val() >= 0"
+          "begeni": { ".validate": "newData.isNumber() && newData.val() >= 0 && (!data.exists() || newData.val() == data.val())" },
+          "oylar": {
+            "$uid": {
+              ".write": "auth != null && auth.token.email != null && auth.uid == $uid && !data.exists() && newData.val() == true && data.parent().parent().child('metin').exists()",
+              ".validate": "newData.val() == true"
+            }
           },
           "zaman": { ".validate": "newData.isNumber() && (data.exists() ? newData.val() == data.val() : newData.val() <= now)" },
           "$diger": { ".validate": false }

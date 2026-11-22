@@ -466,7 +466,7 @@
   <!-- Fikir Panosu (Firebase Realtime Database, modular SDK v13.4.0) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-    import { getDatabase, ref, push, get, remove, onValue, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
+    import { getDatabase, ref, push, set, get, remove, onValue, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 
     // ---------------- Ayarlar ----------------
@@ -583,7 +583,9 @@
       oku(k, v) { try { const x = localStorage.getItem(k); return x == null ? v : JSON.parse(x); } catch { return v; } },
       yaz(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
     };
-    const OY_KEY = "fikir-oylar", BEKLEME_KEY = "fikir-son-gonderim";
+    const BEKLEME_KEY = "fikir-son-gonderim";
+    // Beğeni sayısı = oy veren Google hesaplarının sayısı (her hesap bir fikre 1 oy)
+    const oySayisi = (f) => (Number(f.begeni) || 0) + (f.oylar && typeof f.oylar === "object" ? Object.keys(f.oylar).length : 0);
 
     const ui = {
       form: $("[data-fikir-form]"), gonder: $("[data-fikir-gonder]"), mesaj: $("[data-fikir-mesaj]"),
@@ -646,7 +648,7 @@
         const v = snap.val() || {};
         fikirler = Object.entries(v)
           .filter(([, f]) => f && typeof f.metin === "string")
-          .map(([id, f]) => ({ id, isim: String(f.isim || "Anonim"), metin: f.metin, begeni: Number(f.begeni) || 0, zaman: Number(f.zaman) || 0 }));
+          .map(([id, f]) => ({ id, isim: String(f.isim || "Anonim"), metin: f.metin, begeni: oySayisi(f), oyVerenler: f.oylar || {}, zaman: Number(f.zaman) || 0 }));
         yuklendi = true;
         listeCiz();
       }, (err) => {
@@ -665,7 +667,7 @@
       ui.adet.textContent = sirali.length;
       if (!sirali.length) { liElemanlari.clear(); bos(ui.liste, "Bu hafta henüz fikir yok. İlk fikri sen yaz! ✍️"); return; }
       ui.liste.querySelectorAll(".fikir-bos").forEach((x) => x.remove());
-      const oylar = depo.oku(OY_KEY, {});
+      const benimUid = kullanici && kullanici.uid;
       const gorulen = new Set();
       sirali.forEach((f, i) => {
         gorulen.add(f.id);
@@ -698,9 +700,10 @@
           if (sayi.textContent !== "") { btn.classList.remove("fikir-zipla"); void btn.offsetWidth; btn.classList.add("fikir-zipla"); }
           sayi.textContent = f.begeni;
         }
-        const oyVerildi = !!oylar[`${aktif.key}/${f.id}`];
+        const oyVerildi = !!(benimUid && f.oyVerenler[benimUid]);
         btn.classList.toggle("fikir-begenildi", oyVerildi);
         btn.firstChild.textContent = oyVerildi ? "✔ Beğendin" : "👍 Beğen";
+        btn.title = benimUid ? "" : "Beğenmek için Google ile giriş yap";
         btn.setAttribute("aria-label", `${oyVerildi ? "Beğendin" : "Beğen"}, ${f.begeni} beğeni`);
         const aksiyon = li.querySelector(".fikir-aksiyon");
         let sil = aksiyon.querySelector(".fikir-sil");
@@ -715,19 +718,29 @@
       for (const [id, li] of liElemanlari) if (!gorulen.has(id)) { li.remove(); liElemanlari.delete(id); }
     }
 
+    const bekleyenOy = new Set();
     async function begen(id, btn) {
-      const anahtar = `${aktif.key}/${id}`;
-      const oylar = depo.oku(OY_KEY, {});
-      if (oylar[anahtar]) { btn.animate?.([{ transform: "translateX(-3px)" }, { transform: "translateX(3px)" }, { transform: "none" }], { duration: 200 }); return; }
-      oylar[anahtar] = 1; depo.yaz(OY_KEY, oylar);
-      listeCiz();
+      if (!db) return;
+      if (!kullanici) {
+        mesaj(ui.mesaj, "Beğenmek için Google hesabınla giriş yap.", "fikir-bilgi");
+        await googleGiris();
+        if (!kullanici && auth.currentUser && auth.currentUser.email) kullanici = auth.currentUser;
+        if (!kullanici) return;
+      }
+      const f = fikirler.find((x) => x.id === id);
+      if (!f) return;
+      if (f.oyVerenler[kullanici.uid] || bekleyenOy.has(id)) {
+        btn.animate?.([{ transform: "translateX(-3px)" }, { transform: "translateX(3px)" }, { transform: "none" }], { duration: 200 });
+        return;
+      }
+      bekleyenOy.add(id);
       try {
-        await runTransaction(ref(db, `fikirler/${anahtar}/begeni`), (v) => (Number(v) || 0) + 1);
+        await set(ref(db, `fikirler/${aktif.key}/${id}/oylar/${kullanici.uid}`), true);
       } catch (e) {
         console.error("[Fikir Panosu] beğeni hatası:", e);
-        const o = depo.oku(OY_KEY, {}); delete o[anahtar]; depo.yaz(OY_KEY, o);
-        listeCiz();
         mesaj(ui.mesaj, "Beğeni kaydedilemedi, tekrar dene.");
+      } finally {
+        bekleyenOy.delete(id);
       }
     }
 
@@ -820,7 +833,7 @@
     function haftaSonucu(hafta, tum) {
       const liste = Object.values(tum[hafta] || {})
         .filter((f) => f && typeof f.metin === "string")
-        .map((f) => ({ uid: f.uid, isim: String(f.isim || "Anonim"), metin: f.metin, begeni: Number(f.begeni) || 0, zaman: Number(f.zaman) || 0 }))
+        .map((f) => ({ uid: f.uid, isim: String(f.isim || "Anonim"), metin: f.metin, begeni: oySayisi(f), zaman: Number(f.zaman) || 0 }))
         .sort(siralaFikir);
       const ilk = liste[0];
       const key = ilk && ilk.begeni > 0 ? yazarAnahtari(ilk) : "";
