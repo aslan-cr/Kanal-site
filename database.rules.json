@@ -1,0 +1,28 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "fikirler": {
+      ".read": true,
+      "$hafta": {
+        ".validate": "$hafta.matches(/^[0-9]{4}-W[0-9]{2}$/)",
+        "$id": {
+          ".write": "(!data.exists() && newData.exists()) || (auth != null && auth.token.email == 'admin@rsanimasyon.com')",
+          ".validate": "newData.hasChildren(['isim', 'metin', 'begeni', 'zaman']) && (data.exists() || newData.child('begeni').val() == 0)",
+          "isim": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 25" },
+          "metin": { ".validate": "newData.isString() && newData.val().length >= 5 && newData.val().length <= 200 && !newData.val().matches(/(https?:|www\\.)/i)" },
+          "begeni": {
+            ".write": "data.exists() && newData.isNumber() && newData.val() == data.val() + 1",
+            ".validate": "newData.isNumber() && newData.val() >= 0"
+          },
+          "zaman": { ".validate": "newData.isNumber() && (data.exists() ? newData.val() == data.val() : newData.val() <= now)" },
+          "$diger": { ".validate": false }
+        }
+      }
+    },
+    "liderlikTablosu": {
+      ".read": true,
+      ".write": "(auth != null && auth.token.email == 'admin@rsanimasyon.com') || (newData.child('_meta/sonIslenenSira').isNumber() && (!data.child('_meta/sonIslenenSira').exists() || newData.child('_meta/sonIslenenSira').val() > data.child('_meta/sonIslenenSira').val()))"
+    }
+  }
+}
