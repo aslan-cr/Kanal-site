@@ -7,9 +7,10 @@
       "$hafta": {
         ".validate": "$hafta.matches(/^[0-9]{4}-W[0-9]{2}$/)",
         "$id": {
-          ".write": "(!data.exists() && newData.exists()) || (auth != null && auth.token.email == 'admin@rsanimasyon.com')",
-          ".validate": "newData.hasChildren(['isim', 'metin', 'begeni', 'zaman']) && (data.exists() || newData.child('begeni').val() == 0)",
-          "isim": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 25" },
+          ".write": "(!data.exists() && newData.exists() && auth != null && auth.token.email != null && newData.child('uid').val() == auth.uid) || (auth != null && auth.token.email == 'admin@rsanimasyon.com')",
+          ".validate": "newData.hasChildren(['uid', 'isim', 'metin', 'begeni', 'zaman']) && (data.exists() || newData.child('begeni').val() == 0)",
+          "uid": { ".validate": "newData.isString() && (data.exists() ? newData.val() == data.val() : newData.val() == auth.uid)" },
+          "isim": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 100" },
           "metin": { ".validate": "newData.isString() && newData.val().length >= 5 && newData.val().length <= 200 && !newData.val().matches(/(https?:|www\\.)/i)" },
           "begeni": {
             ".write": "data.exists() && newData.isNumber() && newData.val() == data.val() + 1",

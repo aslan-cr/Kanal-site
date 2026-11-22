@@ -43,6 +43,11 @@
     .fikir-textarea { resize: vertical; min-height: 84px; padding-bottom: 22px; }
     .fikir-sayi { position: absolute; right: 10px; bottom: 6px; font-size: .75rem; font-weight: 800; color: #5d6788; pointer-events: none; }
     .fikir-sayi.fikir-dolu { color: #ff8a1f; }
+    .fikir-hesap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 10px 12px; border-radius: 10px; background: #0b0d17; border: 2px solid #262e4d; }
+    .fikir-hesap-bilgi { font-weight: 800; font-size: .9rem; color: #9aa4c0; overflow-wrap: anywhere; min-width: 0; }
+    .fikir-hesap-bilgi b { color: #8fd0ff; }
+    .fikir-hesap.fikir-girisli { border-color: #00d47a66; }
+    .fikir-google { flex: none; }
     .fikir-form-alt { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
     .fikir-gonder { background: #00d47a; color: #062b1a; box-shadow: 0 5px 0 #009a58, 0 10px 24px #00d47a33; }
     .fikir-gonder:hover { box-shadow: 0 7px 0 #009a58, 0 14px 30px #00d47a44; }
@@ -344,7 +349,7 @@
           </div>
           <div class="fikir-card-body">
             <p class="fikir-lider-not">Hiç sıfırlanmaz. Her Pazartesi geçen haftanın 1.'si buraya eklenir.</p>
-            <div class="fikir-lider-head" aria-hidden="true"><span>#</span><span>İsim</span><span title="Toplam şampiyonluk">🏆</span><span title="Ardışık birincilik serisi">🔥 Seri</span></div>
+            <div class="fikir-lider-head" aria-hidden="true"><span>#</span><span>Hesap</span><span title="Toplam şampiyonluk">🏆</span><span title="Ardışık birincilik serisi">🔥 Seri</span></div>
             <ol class="fikir-lider-list" data-fikir-lider>
               <li class="fikir-bos">Yükleniyor…</li>
             </ol>
@@ -366,10 +371,12 @@
             </div>
 
             <form class="fikir-form" data-fikir-form novalidate autocomplete="off">
-              <div class="fikir-alan">
-                <label for="fikir-isim">İsmin</label>
-                <input id="fikir-isim" class="fikir-input" name="isim" type="text" maxlength="25" placeholder="Örn: BugAvcısı42" required>
-                <small class="fikir-sayi"><span data-fikir-isim-say>0</span>/25</small>
+              <div class="fikir-hesap">
+                <span class="fikir-hesap-bilgi" data-fikir-hesap-bilgi>Fikir göndermek için Google (Gmail) hesabınla giriş yap.</span>
+                <button class="btn btn-ghost btn-sm fikir-google" type="button" data-fikir-google>
+                  <svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+                  <span>Google ile Giriş Yap</span>
+                </button>
               </div>
               <div class="fikir-alan">
                 <label for="fikir-metin">Video fikrin</label>
@@ -460,7 +467,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
     import { getDatabase, ref, push, get, remove, onValue, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
-    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 
     // ---------------- Ayarlar ----------------
     const firebaseConfig = {
@@ -479,7 +486,10 @@
     // bir kullanıcı oluştur, şifresini sen belirle. Kilit ikonunda sadece şifre sorulur.
     const ADMIN_EMAIL = "admin@rsanimasyon.com";
 
-    const ISIM_MAX = 25, METIN_MAX = 200, METIN_MIN = 5;
+    // true: listede e-posta kısmen gizlenir (ah•••@gmail.com) — spam ve gizlilik için önerilir.
+    // false: Gmail adresi tamamen görünür.
+    const EPOSTA_GIZLE = true;
+    const METIN_MAX = 200, METIN_MIN = 5;
     const BEKLEME_MS = 60 * 1000;      // fikir gönderme arası bekleme
     const BENZERLIK_ESIK = 0.8;        // %80 ve üzeri = aynı fikir
     const TR_OFFSET = 3 * 3600 * 1000; // Türkiye saati (UTC+3), hafta Pazartesi 00:00'da döner
@@ -512,6 +522,13 @@
         .replace(/[^a-z0-9]+/g, " ").trim();
     }
     const isimAnahtari = (isim) => normalize(isim).replace(/ /g, "").slice(0, 40);
+    // Liderlik anahtarı: Google hesabının uid'si (eski kayıtlarda isim)
+    const yazarAnahtari = (f) => (f && typeof f.uid === "string" && /^[A-Za-z0-9]{6,128}$/.test(f.uid) ? f.uid : isimAnahtari(f && f.isim));
+    function epostaGoster(eposta, gizle = true) {
+      const [ad, alan] = String(eposta || "").split("@");
+      if (!alan) return String(eposta || "Anonim");
+      return gizle ? `${ad.slice(0, ad.length > 3 ? 2 : 1)}•••@${alan}` : `${ad}@${alan}`;
+    }
 
     function levenshtein(a, b) {
       if (a === b) return 0;
@@ -566,12 +583,12 @@
       oku(k, v) { try { const x = localStorage.getItem(k); return x == null ? v : JSON.parse(x); } catch { return v; } },
       yaz(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
     };
-    const OY_KEY = "fikir-oylar", BEKLEME_KEY = "fikir-son-gonderim", ISIM_KEY = "fikir-isim";
+    const OY_KEY = "fikir-oylar", BEKLEME_KEY = "fikir-son-gonderim";
 
     const ui = {
       form: $("[data-fikir-form]"), gonder: $("[data-fikir-gonder]"), mesaj: $("[data-fikir-mesaj]"),
-      isim: $("#fikir-isim"), metin: $("#fikir-metin"),
-      isimSay: $("[data-fikir-isim-say]"), metinSay: $("[data-fikir-metin-say]"),
+      metin: $("#fikir-metin"), metinSay: $("[data-fikir-metin-say]"),
+      hesap: $(".fikir-hesap"), hesapBilgi: $("[data-fikir-hesap-bilgi]"), google: $("[data-fikir-google]"),
       liste: $("[data-fikir-liste]"), adet: $("[data-fikir-adet]"), durum: $("[data-fikir-durum]"),
       hafta: $("[data-fikir-hafta]"), sayac: $("[data-fikir-sayac]"),
       lider: $("[data-fikir-lider]"), sonKazanan: $("[data-fikir-son-kazanan]"),
@@ -602,6 +619,7 @@
     let fikirler = [];
     let yuklendi = false;
     let admin = false;
+    let kullanici = null; // giriş yapmış Google kullanıcısı
     let haftaAboneligi = null;
     let sonLider; // undefined = henüz yüklenmedi
     const liElemanlari = new Map();
@@ -728,9 +746,34 @@
       hedef.textContent = n;
       hedef.parentElement.classList.toggle("fikir-dolu", n >= max);
     }
-    ui.isim.value = depo.oku(ISIM_KEY, "");
-    sayacYaz(ui.isim, ui.isimSay, ISIM_MAX);
-    ui.isim.addEventListener("input", () => sayacYaz(ui.isim, ui.isimSay, ISIM_MAX));
+
+    // ---------------- Google ile giriş ----------------
+    function hesapCiz() {
+      const girisli = !!(kullanici && kullanici.email);
+      ui.hesap.classList.toggle("fikir-girisli", girisli);
+      ui.google.querySelector("svg").style.display = girisli ? "none" : "";
+      ui.google.querySelector("span").textContent = girisli ? "Çıkış Yap" : "Google ile Giriş Yap";
+      if (girisli) ui.hesapBilgi.replaceChildren("✉ Gönderen: ", el("b", "", epostaGoster(kullanici.email, EPOSTA_GIZLE)));
+      else ui.hesapBilgi.textContent = "Fikir göndermek için Google (Gmail) hesabınla giriş yap.";
+    }
+    async function googleGiris() {
+      const saglayici = new GoogleAuthProvider();
+      saglayici.setCustomParameters({ prompt: "select_account" });
+      try {
+        await signInWithPopup(auth, saglayici);
+        mesaj(ui.mesaj, "");
+      } catch (err) {
+        const kod = err && err.code;
+        if (kod === "auth/popup-blocked" || kod === "auth/operation-not-supported-in-this-environment") return signInWithRedirect(auth, saglayici);
+        if (kod === "auth/popup-closed-by-user" || kod === "auth/cancelled-popup-request") return;
+        console.error("[Fikir Panosu] Google girişi hatası:", err);
+        mesaj(ui.mesaj, kod === "auth/unauthorized-domain" ? "Bu site Firebase'de yetkili alan olarak ekli değil." : "Google ile giriş yapılamadı.");
+      }
+    }
+    ui.google.addEventListener("click", () => {
+      if (!auth) return;
+      if (kullanici) signOut(auth); else googleGiris();
+    });
     ui.metin.addEventListener("input", () => sayacYaz(ui.metin, ui.metinSay, METIN_MAX));
 
     function vurgula(id) {
@@ -743,16 +786,14 @@
     ui.form.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!db || gonderiliyor) return;
-      const isim = ui.isim.value.replace(/\s+/g, " ").trim();
       const metin = ui.metin.value.replace(/\s+/g, " ").trim();
 
-      if (!isim) return mesaj(ui.mesaj, "Önce ismini yaz.");
-      if (!isimAnahtari(isim)) return mesaj(ui.mesaj, "İsminde en az bir harf veya rakam olmalı.");
-      if (isim.length > ISIM_MAX) return mesaj(ui.mesaj, `İsim en fazla ${ISIM_MAX} karakter olabilir.`);
+      if (!kullanici || !kullanici.email) { mesaj(ui.mesaj, "Önce Google hesabınla giriş yap.", "fikir-bilgi"); return googleGiris(); }
+      const isim = epostaGoster(kullanici.email, EPOSTA_GIZLE);
       if (metin.length < METIN_MIN) return mesaj(ui.mesaj, "Fikrin biraz daha uzun olmalı.");
       if (metin.length > METIN_MAX) return mesaj(ui.mesaj, `Fikir en fazla ${METIN_MAX} karakter olabilir.`);
-      if (linkVar(isim) || linkVar(metin)) return mesaj(ui.mesaj, "Link paylaşmak yasak 🚫");
-      if (kufurVar(isim) || kufurVar(metin)) return mesaj(ui.mesaj, "Lütfen kibar ol, uygunsuz kelime var 🙊");
+      if (linkVar(metin)) return mesaj(ui.mesaj, "Link paylaşmak yasak 🚫");
+      if (kufurVar(metin)) return mesaj(ui.mesaj, "Lütfen kibar ol, uygunsuz kelime var 🙊");
       const kalan = beklemeKalan();
       if (kalan > 0) return mesaj(ui.mesaj, `Yeni fikir için ${Math.ceil(kalan / 1000)} saniye bekle.`, "fikir-bilgi");
       if (!yuklendi) return mesaj(ui.mesaj, "Liste daha yükleniyor, birazdan tekrar dene.", "fikir-bilgi");
@@ -763,9 +804,8 @@
       gonderiliyor = true; beklemeGuncelle();
       try {
         const hafta = haftaBilgisi().key;
-        await push(ref(db, `fikirler/${hafta}`), { isim, metin, begeni: 0, zaman: serverTimestamp() });
+        await push(ref(db, `fikirler/${hafta}`), { uid: kullanici.uid, isim, metin, begeni: 0, zaman: serverTimestamp() });
         depo.yaz(BEKLEME_KEY, Date.now());
-        depo.yaz(ISIM_KEY, isim);
         ui.metin.value = ""; sayacYaz(ui.metin, ui.metinSay, METIN_MAX);
         mesaj(ui.mesaj, "Fikrin eklendi! Arkadaşlarına söyle, oy versinler 🎉", "fikir-ok");
       } catch (err) {
@@ -780,14 +820,14 @@
     function haftaSonucu(hafta, tum) {
       const liste = Object.values(tum[hafta] || {})
         .filter((f) => f && typeof f.metin === "string")
-        .map((f) => ({ isim: String(f.isim || "Anonim"), metin: f.metin, begeni: Number(f.begeni) || 0, zaman: Number(f.zaman) || 0 }))
+        .map((f) => ({ uid: f.uid, isim: String(f.isim || "Anonim"), metin: f.metin, begeni: Number(f.begeni) || 0, zaman: Number(f.zaman) || 0 }))
         .sort(siralaFikir);
       const ilk = liste[0];
-      const key = ilk && ilk.begeni > 0 ? isimAnahtari(ilk.isim) : "";
+      const key = ilk && ilk.begeni > 0 ? yazarAnahtari(ilk) : "";
       if (!key) return { hafta, key: null };
       // Kazananın önceki haftalarda yazdığı kendi fikirleriyle benzerlik kontrolü
       const tekrar = Object.keys(tum).some((h) => h < hafta && Object.values(tum[h] || {}).some((f) =>
-        f && isimAnahtari(f.isim) === key && benzerlik(f.metin, ilk.metin) >= BENZERLIK_ESIK));
+        f && yazarAnahtari(f) === key && benzerlik(f.metin, ilk.metin) >= BENZERLIK_ESIK));
       return { hafta, key, isim: ilk.isim, metin: ilk.metin, begeni: ilk.begeni, tekrar };
     }
 
@@ -935,6 +975,8 @@
       });
       onAuthStateChanged(auth, (u) => {
         admin = !!u && u.email === ADMIN_EMAIL;
+        kullanici = u && u.email ? u : null;
+        hesapCiz();
         ui.kilit.classList.toggle("fikir-acik", admin);
         ui.kilit.textContent = admin ? "🔓" : "🔒";
         adminCubugu();
