@@ -1,20 +1,17 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta property="og:image" https://github.io>
-<meta name="twitter:card" content="summary_large_image">
-<meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="description" content="Roblox Studio'da yaşanan komik bug'lar, lag felaketleri ve eğlenceli animasyon maceraları. RSAnimasyon resmi web sitesi.">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<meta property="og:title" content="RSAnimasyon - Roblox Studio Animasyonları">
-<meta property="og:description" content="Roblox Studio'da yaşanan komik bug'lar ve en yeni animasyon videoları burada!">
-<meta property="og:url" content="https://aslan-cr.github.io/Kanal-site/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RSAnimasyon</title>
-  <meta name="description" content="RSAnimasyon — Roblox ve Roblox Studio dünyasından komik animasyonlar.">
-  <meta property="og:title" content="RSAnimasyon">
-  <meta property="og:description" content="Roblox ve Roblox Studio dünyasından komik animasyonlar.">
+  <title>RSAnimasyon - Roblox Studio Animasyonları</title>
+  <meta name="description" content="Roblox Studio'da yaşanan komik bug'lar, lag felaketleri ve eğlenceli animasyon maceraları. RSAnimasyon resmi web sitesi.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RSAnimasyon - Roblox Studio Animasyonları">
+  <meta property="og:description" content="Roblox Studio'da yaşanan komik bug'lar ve en yeni animasyon videoları burada!">
+  <meta property="og:url" content="https://aslan-cr.github.io/Kanal-site/">
+  <meta property="og:image" content="https://aslan-cr.github.io/Kanal-site/kapak.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0b0d17">
   <script>document.documentElement.classList.add("js");</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +19,120 @@
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='4' y='4' width='24' height='24' rx='4' fill='%23ff3b3b' transform='rotate(12 16 16)'/><rect x='12' y='12' width='8' height='8' fill='%23111'  transform='rotate(12 16 16)'/></svg>">
   <link rel="stylesheet" href="style.css?v=9">
+  <!-- Fikir Panosu stilleri (yalnızca fikir- ön ekli sınıflar) -->
+  <style>
+    .fikir-sec { scroll-margin-top: 90px; }
+    .fikir-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+    .fikir-lider { grid-column: 2; grid-row: 1; position: sticky; top: 90px; }
+    .fikir-ana { grid-column: 1; grid-row: 1; }
+    .fikir-card { background: #1d2238; border: 1px solid #333c63; border-radius: 16px; box-shadow: 0 24px 50px #0007, 0 8px 0 #05070f; min-width: 0; }
+    .fikir-card-body { padding: 18px; }
+    .fikir-hafta-etiket { flex: none; font-size: .78rem; padding: 3px 10px; border-radius: 6px; background: #9b5cff2e; color: #cdb2ff; font-variant-numeric: tabular-nums; }
+
+    .fikir-sayac { display: flex; align-items: center; gap: 10px; padding: 12px 16px; margin-bottom: 18px; border-radius: 12px; background: linear-gradient(90deg, #ffcf3322, #ff8a1f14); border: 1px solid #ffcf3355; font-weight: 800; color: #ffe9a3; }
+    .fikir-sayac b { font-family: var(--display, "Lilita One", sans-serif); font-weight: 400; font-size: 1.15rem; color: #ffcf33; letter-spacing: .5px; font-variant-numeric: tabular-nums; }
+    .fikir-sayac-ico { font-size: 1.3rem; display: inline-block; animation: fikir-kum 2.4s ease-in-out infinite; }
+    @keyframes fikir-kum { 0%, 40% { transform: rotate(0); } 50%, 90% { transform: rotate(180deg); } 100% { transform: rotate(360deg); } }
+
+    .fikir-form { display: grid; gap: 12px; padding: 16px; border-radius: 14px; background: #151a2e; border: 1px solid #262e4d; margin-bottom: 20px; }
+    .fikir-alan { position: relative; display: grid; gap: 6px; }
+    .fikir-alan label, .fikir-admin-form label { font-weight: 800; font-size: .9rem; color: #9aa4c0; }
+    .fikir-input { width: 100%; font: inherit; font-weight: 600; color: #f4f6fb; background: #0b0d17; border: 2px solid #262e4d; border-radius: 10px; padding: 10px 12px; outline: none; transition: border-color .15s, box-shadow .15s; }
+    .fikir-input::placeholder { color: #5d6788; }
+    .fikir-input:focus { border-color: #3ba7ff; box-shadow: 0 0 0 4px #3ba7ff26; }
+    .fikir-textarea { resize: vertical; min-height: 84px; padding-bottom: 22px; }
+    .fikir-sayi { position: absolute; right: 10px; bottom: 6px; font-size: .75rem; font-weight: 800; color: #5d6788; pointer-events: none; }
+    .fikir-sayi.fikir-dolu { color: #ff8a1f; }
+    .fikir-hesap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 10px 12px; border-radius: 10px; background: #0b0d17; border: 2px solid #262e4d; }
+    .fikir-hesap-bilgi { font-weight: 800; font-size: .9rem; color: #9aa4c0; overflow-wrap: anywhere; min-width: 0; }
+    .fikir-hesap-bilgi b { color: #8fd0ff; }
+    .fikir-hesap.fikir-girisli { border-color: #00d47a66; }
+    .fikir-google { flex: none; }
+    .fikir-form-alt { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .fikir-gonder { background: #00d47a; color: #062b1a; box-shadow: 0 5px 0 #009a58, 0 10px 24px #00d47a33; }
+    .fikir-gonder:hover { box-shadow: 0 7px 0 #009a58, 0 14px 30px #00d47a44; }
+    .fikir-gonder:active { box-shadow: 0 1px 0 #009a58; }
+    .fikir-gonder:disabled { filter: grayscale(.8) brightness(.8); cursor: not-allowed; transform: none; }
+    .fikir-mesaj { font-weight: 800; font-size: .9rem; min-height: 1.2em; }
+    .fikir-mesaj.fikir-hata { color: #ff6b6b; }
+    .fikir-mesaj.fikir-ok { color: #00d47a; }
+    .fikir-mesaj.fikir-bilgi { color: #ffcf33; }
+
+    .fikir-liste-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; font-family: var(--display, "Lilita One", sans-serif); font-size: 1.2rem; letter-spacing: .5px; }
+    .fikir-liste-head b { font-weight: 400; color: #3ba7ff; }
+    .fikir-durum { display: inline-flex; align-items: center; gap: 6px; font-family: "Nunito", sans-serif; font-weight: 800; font-size: .8rem; color: #9aa4c0; }
+    .fikir-durum i { width: 8px; height: 8px; border-radius: 50%; background: #ffcf33; }
+    .fikir-durum.fikir-canli i { background: #00d47a; box-shadow: 0 0 0 0 #00d47a88; animation: fikir-nabiz 1.6s infinite; }
+    .fikir-durum.fikir-kopuk i { background: #ff3b3b; }
+    @keyframes fikir-nabiz { 70% { box-shadow: 0 0 0 8px #00d47a00; } 100% { box-shadow: 0 0 0 0 #00d47a00; } }
+
+    .fikir-liste, .fikir-lider-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .fikir-liste { max-height: 560px; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; scrollbar-color: #333c63 transparent; }
+    .fikir-bos { padding: 18px; text-align: center; color: #9aa4c0; font-weight: 700; border: 2px dashed #262e4d; border-radius: 12px; }
+    .fikir-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: #151a2e; border: 1px solid #262e4d; transition: border-color .2s, transform .2s; animation: fikir-gir .35s ease-out; }
+    .fikir-item:hover { border-color: #3ba7ff66; }
+    @keyframes fikir-gir { from { opacity: 0; transform: translateY(8px); } }
+    .fikir-sira { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; background: #262c47; font-family: var(--display, "Lilita One", sans-serif); font-size: 1.05rem; color: #9aa4c0; transform: rotate(-6deg); }
+    .fikir-item.fikir-ilk { border-color: #ffcf3388; background: linear-gradient(90deg, #ffcf3314, #151a2e 60%); }
+    .fikir-item.fikir-ilk .fikir-sira { background: #ffcf33; color: #3a2a00; box-shadow: 0 3px 0 #c99a00; }
+    .fikir-item.fikir-iki .fikir-sira { background: #c9d3ea; color: #23293f; box-shadow: 0 3px 0 #8d97b0; }
+    .fikir-item.fikir-uc .fikir-sira { background: #ff8a1f; color: #3a1a00; box-shadow: 0 3px 0 #c45f00; }
+    .fikir-icerik { min-width: 0; }
+    .fikir-metin { margin: 0; font-weight: 700; overflow-wrap: anywhere; line-height: 1.4; }
+    .fikir-yazar { font-size: .8rem; font-weight: 800; color: #9aa4c0; }
+    .fikir-yazar b { color: #8fd0ff; font-weight: 800; }
+    .fikir-aksiyon { display: flex; align-items: center; gap: 8px; }
+    .fikir-begen { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-weight: 900; font-size: .9rem; color: #fff; background: #3ba7ff; border: 0; border-radius: 10px; padding: 8px 12px; cursor: pointer; box-shadow: 0 4px 0 #1f6fb3; transition: transform .1s, box-shadow .1s; white-space: nowrap; }
+    .fikir-begen:hover { transform: translateY(-1px); box-shadow: 0 5px 0 #1f6fb3; }
+    .fikir-begen:active { transform: translateY(3px); box-shadow: 0 1px 0 #1f6fb3; }
+    .fikir-begen b { min-width: 1.4em; text-align: center; font-variant-numeric: tabular-nums; padding: 0 6px; border-radius: 6px; background: #0004; }
+    .fikir-begen.fikir-begenildi { background: #262c47; color: #8fd0ff; box-shadow: 0 4px 0 #05070f; cursor: default; }
+    .fikir-begen.fikir-zipla b { animation: fikir-zipla .4s; }
+    @keyframes fikir-zipla { 40% { transform: scale(1.5); } }
+    .fikir-sil { font: inherit; font-size: .95rem; border: 1px solid #ff3b3b66; background: #ff3b3b1f; color: #ff8080; border-radius: 9px; padding: 6px 9px; cursor: pointer; }
+    .fikir-sil:hover { background: #ff3b3b; color: #fff; }
+
+    .fikir-lider-not { margin: 0 0 12px; font-size: .85rem; font-weight: 700; color: #9aa4c0; }
+    .fikir-lider-head, .fikir-lider-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) 44px 62px; align-items: center; gap: 8px; }
+    .fikir-lider-row.fikir-admin-satir { grid-template-columns: 34px minmax(0, 1fr) 44px 62px 36px; }
+    .fikir-lider-head { padding: 0 12px 6px; font-size: .75rem; font-weight: 900; color: #5d6788; text-transform: uppercase; letter-spacing: .5px; }
+    .fikir-lider-head span:nth-child(n+3) { text-align: center; }
+    .fikir-lider-row { padding: 10px 12px; border-radius: 12px; background: #151a2e; border: 1px solid #262e4d; }
+    .fikir-lider-row:nth-child(1) { border-color: #ffcf3399; box-shadow: 0 0 24px #ffcf3322; }
+    .fikir-lider-row:nth-child(2) { border-color: #c9d3ea66; }
+    .fikir-lider-row:nth-child(3) { border-color: #ff8a1f77; }
+    .fikir-madalya { font-size: 1.25rem; text-align: center; font-family: var(--display, "Lilita One", sans-serif); color: #9aa4c0; }
+    .fikir-lider-isim { font-weight: 900; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .fikir-lider-toplam { text-align: center; font-family: var(--display, "Lilita One", sans-serif); font-size: 1.2rem; color: #ffcf33; }
+    .fikir-seri { text-align: center; font-weight: 900; font-size: .9rem; color: #5d6788; white-space: nowrap; }
+    .fikir-seri.fikir-yaniyor { color: #ff8a1f; text-shadow: 0 0 12px #ff8a1f88; }
+    .fikir-son-kazanan { margin-top: 14px; padding: 12px; border-radius: 12px; background: #9b5cff1a; border: 1px solid #9b5cff55; font-size: .85rem; font-weight: 700; color: #d9c8ff; overflow-wrap: anywhere; }
+    .fikir-son-kazanan b { color: #fff; }
+
+    .fikir-admin-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; padding: 10px 14px; border-radius: 12px; background: #ff3b3b1a; border: 1px solid #ff3b3b66; font-weight: 800; color: #ffb3b3; }
+
+    .fikir-kilit { position: fixed; right: 24px; bottom: 78px; z-index: 39; width: 34px; height: 34px; display: grid; place-items: center; padding: 0; font-size: 15px; border-radius: 10px; border: 1px solid #262e4d; background: #11152a; cursor: pointer; opacity: .22; transition: opacity .2s, transform .2s; }
+    .fikir-kilit:hover, .fikir-kilit:focus-visible { opacity: 1; transform: scale(1.08); }
+    .fikir-kilit.fikir-acik { opacity: .9; border-color: #00d47a; }
+    .fikir-modal { position: fixed; inset: 0; z-index: 95; display: grid; place-items: center; padding: 16px; background: #05070fcc; backdrop-filter: blur(4px); }
+    .fikir-modal[hidden] { display: none; }
+    .fikir-modal-kutu { width: min(380px, 100%); background: #1d2238; border: 1px solid #333c63; border-radius: 16px; box-shadow: 0 24px 50px #000a; }
+    .fikir-admin-form { display: grid; gap: 12px; }
+
+    @media (max-width: 900px) {
+      .fikir-grid { grid-template-columns: minmax(0, 1fr); }
+      .fikir-lider, .fikir-ana { grid-column: 1; grid-row: auto; position: static; }
+    }
+    @media (max-width: 520px) {
+      .fikir-card-body { padding: 14px; }
+      .fikir-item { grid-template-columns: auto minmax(0, 1fr); }
+      .fikir-aksiyon { grid-column: 1 / -1; justify-content: flex-end; }
+      .fikir-sayac { font-size: .92rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fikir-sayac-ico, .fikir-item, .fikir-durum.fikir-canli i { animation: none; }
+    }
+  </style>
 </head>
 <body>
   <div class="progress" aria-hidden="true"><span data-progress></span></div>
@@ -54,6 +165,7 @@
       <nav>
         <a href="#son-videolar">Son Videolar</a>
         <a href="#icerik">İçerik</a>
+        <a href="#fikir-panosu">Fikir Öner</a>
         <a href="#basarimlar">Başarımlar</a>
         <span class="nav-subs" data-nav-subs hidden><i></i><b data-nav-sub-num></b> abone</span>
         <a class="btn btn-sm" href="https://www.youtube.com/@rsanimasyon?sub_confirmation=1" target="_blank" rel="noopener">Abone Ol</a>
@@ -221,6 +333,94 @@
       </div>
     </section>
 
+    <!-- FİKİR PANOSU (Haftalık Video Fikri Yarışması) -->
+    <section id="fikir-panosu" class="wrap fikir-sec">
+      <div class="section-head" data-reveal>
+        <h2 class="section-title">💡 Haftalık Video Fikri Yarışması</h2>
+        <p class="section-sub">Bir sonraki videonun fikrini sen ver! Üyelik yok, giriş yok. Fikrini yaz, beğendiklerine oy ver. Haftanın birincisi Şampiyonlar Tablosuna girer.</p>
+      </div>
+
+      <div class="fikir-grid">
+        <!-- Kalıcı liderlik tablosu -->
+        <aside class="fikir-card fikir-lider" data-reveal style="--rd:.08s" aria-labelledby="fikir-lider-baslik">
+          <div class="win-bar">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="win-title" id="fikir-lider-baslik">🏆 Şampiyonlar Liderlik Tablosu</span>
+          </div>
+          <div class="fikir-card-body">
+            <p class="fikir-lider-not">Hiç sıfırlanmaz. Her Pazartesi geçen haftanın 1.'si buraya eklenir.</p>
+            <div class="fikir-lider-head" aria-hidden="true"><span>#</span><span>Hesap</span><span title="Toplam şampiyonluk">🏆</span><span title="Ardışık birincilik serisi">🔥 Seri</span></div>
+            <ol class="fikir-lider-list" data-fikir-lider>
+              <li class="fikir-bos">Yükleniyor…</li>
+            </ol>
+            <div class="fikir-son-kazanan" data-fikir-son-kazanan hidden></div>
+          </div>
+        </aside>
+
+        <!-- Haftalık fikir paneli -->
+        <div class="fikir-card fikir-ana" data-reveal>
+          <div class="win-bar">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="win-title">📝 Bu Haftanın Fikirleri</span>
+            <span class="fikir-hafta-etiket" data-fikir-hafta>—</span>
+          </div>
+          <div class="fikir-card-body">
+            <div class="fikir-sayac" role="timer" aria-live="off">
+              <span class="fikir-sayac-ico" aria-hidden="true">⏳</span>
+              <span>Yeni haftaya kalan süre: <b data-fikir-sayac>—</b></span>
+            </div>
+
+            <form class="fikir-form" data-fikir-form novalidate autocomplete="off">
+              <div class="fikir-hesap">
+                <span class="fikir-hesap-bilgi" data-fikir-hesap-bilgi>Fikir göndermek için Google (Gmail) hesabınla giriş yap.</span>
+                <button class="btn btn-ghost btn-sm fikir-google" type="button" data-fikir-google>
+                  <svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+                  <span>Google ile Giriş Yap</span>
+                </button>
+              </div>
+              <div class="fikir-alan">
+                <label for="fikir-metin">Video fikrin</label>
+                <textarea id="fikir-metin" class="fikir-input fikir-textarea" name="metin" maxlength="200" rows="3" placeholder="Örn: Studio'da Ctrl+Z bozulursa ne olur?" required></textarea>
+                <small class="fikir-sayi"><span data-fikir-metin-say>0</span>/200</small>
+              </div>
+              <div class="fikir-form-alt">
+                <button class="btn fikir-gonder" type="submit" data-fikir-gonder>🚀 Fikrimi Gönder</button>
+                <span class="fikir-mesaj" data-fikir-mesaj role="status" aria-live="polite"></span>
+              </div>
+            </form>
+
+            <div class="fikir-liste-head">
+              <span>Fikirler <b data-fikir-adet>0</b></span>
+              <span class="fikir-durum" data-fikir-durum><i></i>Bağlanıyor…</span>
+            </div>
+            <ul class="fikir-liste" data-fikir-liste>
+              <li class="fikir-bos">Fikirler yükleniyor…</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gizli yönetici kilidi -->
+      <button class="fikir-kilit" type="button" data-fikir-kilit aria-label="Yönetici girişi" title="Yönetici">🔒</button>
+      <div class="fikir-modal" data-fikir-modal hidden>
+        <div class="fikir-modal-kutu" role="dialog" aria-modal="true" aria-labelledby="fikir-modal-baslik">
+          <div class="win-bar">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="win-title" id="fikir-modal-baslik">🔐 Yönetici Girişi</span>
+          </div>
+          <form class="fikir-card-body fikir-admin-form" data-fikir-admin-form>
+            <label for="fikir-admin-sifre">Yönetici şifresi</label>
+            <input id="fikir-admin-sifre" class="fikir-input" type="password" autocomplete="current-password" required>
+            <div class="fikir-form-alt">
+              <button class="btn btn-sm" type="submit">Giriş</button>
+              <button class="btn btn-ghost btn-sm" type="button" data-fikir-modal-kapat>Kapat</button>
+            </div>
+            <span class="fikir-mesaj" data-fikir-admin-mesaj role="status"></span>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <!-- BAŞARIMLAR -->
     <section id="basarimlar" class="wrap badges-sec">
       <div class="section-head" data-reveal>
@@ -263,5 +463,543 @@
   <script src="subs.js?v=9"></script>
   <script src="fx.js?v=9"></script>
   <script src="play.js?v=9"></script>
+  <!-- Fikir Panosu (Firebase Realtime Database, modular SDK v13.4.0) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+    import { getDatabase, ref, push, set, get, remove, onValue, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+    // ---------------- Ayarlar ----------------
+    const firebaseConfig = {
+      apiKey: "AIzaSyDpHUtad_9glrEFHAVvooR-8pab65Jx0C8",
+      authDomain: "site-fikir.firebaseapp.com",
+      // Firebase Console > Realtime Database sayfasının üstündeki adresi buraya yaz.
+      // (Veritabanı Avrupa'daysa: https://site-fikir-default-rtdb.europe-west1.firebasedatabase.app)
+      databaseURL: "https://site-fikir-default-rtdb.firebaseio.com",
+      projectId: "site-fikir",
+      storageBucket: "site-fikir.firebasestorage.app",
+      messagingSenderId: "881315386991",
+      appId: "1:881315386991:web:6e73280ffb7a313ee89f9a",
+      measurementId: "G-3EF1S3BG61"
+    };
+    // Yönetici hesabı: Firebase Console > Authentication > Users kısmında bu e-postayla
+    // bir kullanıcı oluştur, şifresini sen belirle. Kilit ikonunda sadece şifre sorulur.
+    const ADMIN_EMAIL = "admin@rsanimasyon.com";
+
+    // true: listede e-posta kısmen gizlenir (ah•••@gmail.com) — spam ve gizlilik için önerilir.
+    // false: Gmail adresi tamamen görünür.
+    const EPOSTA_GIZLE = true;
+    const METIN_MAX = 200, METIN_MIN = 5;
+    const BEKLEME_MS = 60 * 1000;      // fikir gönderme arası bekleme
+    const BENZERLIK_ESIK = 0.8;        // %80 ve üzeri = aynı fikir
+    const TR_OFFSET = 3 * 3600 * 1000; // Türkiye saati (UTC+3), hafta Pazartesi 00:00'da döner
+    const GUN = 864e5;
+
+    /* SAF-BASLA (saf yardımcı fonksiyonlar) */
+    function haftaBilgisi(an = Date.now()) {
+      const d = new Date(an + TR_OFFSET);
+      const gun = (d.getUTCDay() + 6) % 7; // Pazartesi = 0
+      const pazartesi = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - gun);
+      const persembe = new Date(pazartesi + 3 * GUN);
+      const yil = persembe.getUTCFullYear();
+      const no = Math.floor((persembe - Date.UTC(yil, 0, 1)) / GUN / 7) + 1;
+      return { key: `${yil}-W${String(no).padStart(2, "0")}`, baslangic: pazartesi - TR_OFFSET, bitis: pazartesi + 7 * GUN - TR_OFFSET };
+    }
+    function haftaBaslangici(key) {
+      const [, y, w] = key.match(/^(\d{4})-W(\d{2})$/).map(Number);
+      const jan4 = Date.UTC(y, 0, 4);
+      const pzt = jan4 - ((new Date(jan4).getUTCDay() + 6) % 7) * GUN;
+      return pzt + (w - 1) * 7 * GUN - TR_OFFSET;
+    }
+    const oncekiHafta = (key) => haftaBilgisi(haftaBaslangici(key) - 1).key;
+    const haftaSira = (key) => { const [, y, w] = key.match(/^(\d{4})-W(\d{2})$/).map(Number); return y * 100 + w; };
+
+    const TR_HARF = { "ç": "c", "ğ": "g", "ı": "i", "i̇": "i", "ö": "o", "ş": "s", "ü": "u", "â": "a", "î": "i", "û": "u" };
+    function normalize(s) {
+      return String(s || "").toLocaleLowerCase("tr-TR")
+        .replace(/i̇|[çğıöşüâîû]/g, (h) => TR_HARF[h] || h)
+        .normalize("NFKD").replace(/[̀-ͯ]/g, "")
+        .replace(/[^a-z0-9]+/g, " ").trim();
+    }
+    const isimAnahtari = (isim) => normalize(isim).replace(/ /g, "").slice(0, 40);
+    // Liderlik anahtarı: Google hesabının uid'si (eski kayıtlarda isim)
+    const yazarAnahtari = (f) => (f && typeof f.uid === "string" && /^[A-Za-z0-9]{6,128}$/.test(f.uid) ? f.uid : isimAnahtari(f && f.isim));
+    function epostaGoster(eposta, gizle = true) {
+      const [ad, alan] = String(eposta || "").split("@");
+      if (!alan) return String(eposta || "Anonim");
+      return gizle ? `${ad.slice(0, ad.length > 3 ? 2 : 1)}•••@${alan}` : `${ad}@${alan}`;
+    }
+
+    function levenshtein(a, b) {
+      if (a === b) return 0;
+      let onceki = Array.from({ length: b.length + 1 }, (_, i) => i);
+      for (let i = 1; i <= a.length; i++) {
+        const satir = [i];
+        for (let j = 1; j <= b.length; j++) {
+          satir[j] = Math.min(onceki[j] + 1, satir[j - 1] + 1, onceki[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        }
+        onceki = satir;
+      }
+      return onceki[b.length];
+    }
+    function dice(a, b) {
+      a = a.replace(/ /g, ""); b = b.replace(/ /g, "");
+      if (a.length < 2 || b.length < 2) return a === b ? 1 : 0;
+      const say = new Map();
+      for (let i = 0; i < a.length - 1; i++) { const g = a.slice(i, i + 2); say.set(g, (say.get(g) || 0) + 1); }
+      let ortak = 0;
+      for (let i = 0; i < b.length - 1; i++) { const g = b.slice(i, i + 2); const n = say.get(g); if (n) { ortak++; say.set(g, n - 1); } }
+      return (2 * ortak) / (a.length - 1 + b.length - 1);
+    }
+    // 0..1 arası metin benzerliği (Türkçe karakter/büyük-küçük harf/noktalama duyarsız)
+    function benzerlik(x, y) {
+      const a = normalize(x), b = normalize(y);
+      if (!a || !b) return 0;
+      if (a === b) return 1;
+      const lev = 1 - levenshtein(a, b) / Math.max(a.length, b.length);
+      return Math.max(lev, dice(a, b));
+    }
+
+    const LINK_RE = /(https?:\/\/|www\.|\.(com|net|org|io|gg|xyz|me|tv|ly|co|tr|info|site|link)\b|discord\.gg)/i;
+    // Not: kelimeler tekrar eden harfler tek harfe indirilerek karşılaştırılır (yarrak -> yarak, pussy -> pusy)
+    const KUFUR_TAM = ["amk", "amq", "aq", "mk", "sik", "sikik", "sikis", "oc", "pic", "ibne", "gavat", "dick", "fag", "cunt", "niger", "niga", "nigers", "nigas"];
+    const KUFUR_ON = ["orospu", "oruspu", "orspu", "siktir", "sikerim", "sikeyim", "sikim", "sikiyim", "amcik", "aminakoy", "aminako", "amina", "yarak", "pezevenk", "kahpe", "kaltak", "surtuk", "gerizekali", "serefsiz", "gotveren", "gotlek", "fuck", "motherfuck", "bitch", "shit", "bastard", "whore", "slut", "fagot", "pusy", "dumbas", "ashole"];
+    const KUFUR_BITISIK = ["orospu", "siktir", "sikerim", "amcik", "pezevenk", "fuck", "bitch", "motherfuck"];
+    function kufurVar(metin) {
+      const temiz = String(metin || "").toLocaleLowerCase("tr-TR")
+        .replace(/[0134578@$]/g, (c) => ({ 0: "o", 1: "i", 3: "e", 4: "a", 5: "s", 7: "t", 8: "b", "@": "a", "$": "s" })[c]);
+      const kelimeler = normalize(temiz).replace(/(.)\1+/g, "$1").split(" ").filter(Boolean);
+      if (kelimeler.some((k) => KUFUR_TAM.includes(k) || KUFUR_ON.some((o) => k.startsWith(o)))) return true;
+      const bitisik = kelimeler.join("");
+      return KUFUR_BITISIK.some((k) => bitisik.includes(k));
+    }
+    const linkVar = (metin) => LINK_RE.test(String(metin || ""));
+    /* SAF-BITIR */
+
+    // ---------------- Yardımcılar ----------------
+    const $ = (s, k = document) => k.querySelector(s);
+    const el = (etiket, sinif, metin) => { const e = document.createElement(etiket); if (sinif) e.className = sinif; if (metin != null) e.textContent = metin; return e; };
+    const depo = {
+      oku(k, v) { try { const x = localStorage.getItem(k); return x == null ? v : JSON.parse(x); } catch { return v; } },
+      yaz(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+    };
+    const BEKLEME_KEY = "fikir-son-gonderim";
+    // Beğeni sayısı = oy veren Google hesaplarının sayısı (her hesap bir fikre 1 oy)
+    const oySayisi = (f) => (Number(f.begeni) || 0) + (f.oylar && typeof f.oylar === "object" ? Object.keys(f.oylar).length : 0);
+
+    const ui = {
+      form: $("[data-fikir-form]"), gonder: $("[data-fikir-gonder]"), mesaj: $("[data-fikir-mesaj]"),
+      metin: $("#fikir-metin"), metinSay: $("[data-fikir-metin-say]"),
+      hesap: $(".fikir-hesap"), hesapBilgi: $("[data-fikir-hesap-bilgi]"), google: $("[data-fikir-google]"),
+      liste: $("[data-fikir-liste]"), adet: $("[data-fikir-adet]"), durum: $("[data-fikir-durum]"),
+      hafta: $("[data-fikir-hafta]"), sayac: $("[data-fikir-sayac]"),
+      lider: $("[data-fikir-lider]"), sonKazanan: $("[data-fikir-son-kazanan]"),
+      kilit: $("[data-fikir-kilit]"), modal: $("[data-fikir-modal]"), adminForm: $("[data-fikir-admin-form]"),
+      adminMesaj: $("[data-fikir-admin-mesaj]"), sifre: $("#fikir-admin-sifre"), ana: $(".fikir-ana .fikir-card-body"),
+    };
+    if (!ui.form) throw new Error("Fikir panosu bulunamadı");
+
+    function mesaj(hedef, metin, tur = "fikir-hata") { hedef.textContent = metin; hedef.className = "fikir-mesaj " + (metin ? tur : ""); }
+    function durum(tur, metin) { ui.durum.className = "fikir-durum " + (tur ? "fikir-" + tur : ""); ui.durum.lastChild.textContent = metin; }
+    function bos(liste, metin) { liste.replaceChildren(el("li", "fikir-bos", metin)); }
+
+    // ---------------- Firebase ----------------
+    let db, auth;
+    try {
+      const app = initializeApp(firebaseConfig, "fikir-panosu");
+      db = getDatabase(app);
+      auth = getAuth(app);
+    } catch (e) {
+      console.error("[Fikir Panosu] Firebase başlatılamadı:", e);
+      durum("kopuk", "Bağlantı yok");
+      bos(ui.liste, "Fikir panosuna şu an bağlanılamıyor. Biraz sonra tekrar dene.");
+      bos(ui.lider, "Liderlik tablosu yüklenemedi.");
+      ui.gonder.disabled = true;
+    }
+
+    let aktif = haftaBilgisi();
+    let fikirler = [];
+    let yuklendi = false;
+    let admin = false;
+    let kullanici = null; // giriş yapmış Google kullanıcısı
+    let haftaAboneligi = null;
+    let sonLider; // undefined = henüz yüklenmedi
+    const liElemanlari = new Map();
+
+    // ---------------- Geri sayım ----------------
+    const iki = (n) => String(n).padStart(2, "0");
+    function sayacGuncelle() {
+      let kalan = aktif.bitis - Date.now();
+      if (kalan <= 0) { yeniHafta(); kalan = aktif.bitis - Date.now(); }
+      const s = Math.max(0, Math.floor(kalan / 1000));
+      const g = Math.floor(s / 86400), sa = Math.floor((s % 86400) / 3600), dk = Math.floor((s % 3600) / 60), sn = s % 60;
+      ui.sayac.textContent = `${g} gün ${sa} saat ${iki(dk)} dk ${iki(sn)} sn`;
+      beklemeGuncelle();
+    }
+
+    function yeniHafta() {
+      aktif = haftaBilgisi();
+      ui.hafta.textContent = aktif.key;
+      if (!db) return;
+      if (haftaAboneligi) haftaAboneligi();
+      yuklendi = false; fikirler = []; liElemanlari.clear();
+      bos(ui.liste, "Fikirler yükleniyor…");
+      haftaAboneligi = onValue(ref(db, `fikirler/${aktif.key}`), (snap) => {
+        const v = snap.val() || {};
+        fikirler = Object.entries(v)
+          .filter(([, f]) => f && typeof f.metin === "string")
+          .map(([id, f]) => ({ id, isim: String(f.isim || "Anonim"), metin: f.metin, begeni: oySayisi(f), oyVerenler: f.oylar || {}, zaman: Number(f.zaman) || 0 }));
+        yuklendi = true;
+        listeCiz();
+      }, (err) => {
+        console.error("[Fikir Panosu] okuma hatası:", err);
+        durum("kopuk", "Okuma izni yok");
+        bos(ui.liste, "Fikirler okunamadı (veritabanı kurallarını kontrol et).");
+      });
+      haftaDevri();
+    }
+
+    // ---------------- Fikir listesi ----------------
+    const siralaFikir = (a, b) => b.begeni - a.begeni || a.zaman - b.zaman;
+    function listeCiz() {
+      if (!yuklendi) return;
+      const sirali = [...fikirler].sort(siralaFikir);
+      ui.adet.textContent = sirali.length;
+      if (!sirali.length) { liElemanlari.clear(); bos(ui.liste, "Bu hafta henüz fikir yok. İlk fikri sen yaz! ✍️"); return; }
+      ui.liste.querySelectorAll(".fikir-bos").forEach((x) => x.remove());
+      const benimUid = kullanici && kullanici.uid;
+      const gorulen = new Set();
+      sirali.forEach((f, i) => {
+        gorulen.add(f.id);
+        let li = liElemanlari.get(f.id);
+        if (!li) {
+          li = el("li", "fikir-item");
+          li.dataset.id = f.id;
+          const sira = el("span", "fikir-sira");
+          const icerik = el("div", "fikir-icerik");
+          icerik.append(el("p", "fikir-metin"), el("span", "fikir-yazar"));
+          const aksiyon = el("div", "fikir-aksiyon");
+          const btn = el("button", "fikir-begen");
+          btn.type = "button";
+          btn.append("👍 Beğen", el("b"));
+          btn.addEventListener("click", () => begen(li.dataset.id, btn));
+          aksiyon.append(btn);
+          li.append(sira, icerik, aksiyon);
+          liElemanlari.set(f.id, li);
+        }
+        li.classList.toggle("fikir-ilk", i === 0 && f.begeni > 0);
+        li.classList.toggle("fikir-iki", i === 1 && f.begeni > 0);
+        li.classList.toggle("fikir-uc", i === 2 && f.begeni > 0);
+        li.querySelector(".fikir-sira").textContent = i + 1;
+        li.querySelector(".fikir-metin").textContent = f.metin;
+        const yazar = li.querySelector(".fikir-yazar");
+        yazar.replaceChildren("öneren: ", el("b", "", f.isim));
+        const btn = li.querySelector(".fikir-begen");
+        const sayi = btn.querySelector("b");
+        if (sayi.textContent !== String(f.begeni)) {
+          if (sayi.textContent !== "") { btn.classList.remove("fikir-zipla"); void btn.offsetWidth; btn.classList.add("fikir-zipla"); }
+          sayi.textContent = f.begeni;
+        }
+        const oyVerildi = !!(benimUid && f.oyVerenler[benimUid]);
+        btn.classList.toggle("fikir-begenildi", oyVerildi);
+        btn.firstChild.textContent = oyVerildi ? "✔ Beğendin" : "👍 Beğen";
+        btn.title = benimUid ? "" : "Beğenmek için Google ile giriş yap";
+        btn.setAttribute("aria-label", `${oyVerildi ? "Beğendin" : "Beğen"}, ${f.begeni} beğeni`);
+        const aksiyon = li.querySelector(".fikir-aksiyon");
+        let sil = aksiyon.querySelector(".fikir-sil");
+        if (admin && !sil) {
+          sil = el("button", "fikir-sil", "🗑");
+          sil.type = "button"; sil.title = "Fikri sil"; sil.setAttribute("aria-label", "Fikri sil");
+          sil.addEventListener("click", () => fikirSil(li.dataset.id));
+          aksiyon.append(sil);
+        } else if (!admin && sil) sil.remove();
+        ui.liste.append(li); // sıralamaya göre taşı
+      });
+      for (const [id, li] of liElemanlari) if (!gorulen.has(id)) { li.remove(); liElemanlari.delete(id); }
+    }
+
+    const bekleyenOy = new Set();
+    async function begen(id, btn) {
+      if (!db) return;
+      if (!kullanici) {
+        mesaj(ui.mesaj, "Beğenmek için Google hesabınla giriş yap.", "fikir-bilgi");
+        await googleGiris();
+        if (!kullanici && auth.currentUser && auth.currentUser.email) kullanici = auth.currentUser;
+        if (!kullanici) return;
+      }
+      const f = fikirler.find((x) => x.id === id);
+      if (!f) return;
+      if (f.oyVerenler[kullanici.uid] || bekleyenOy.has(id)) {
+        btn.animate?.([{ transform: "translateX(-3px)" }, { transform: "translateX(3px)" }, { transform: "none" }], { duration: 200 });
+        return;
+      }
+      bekleyenOy.add(id);
+      try {
+        await set(ref(db, `fikirler/${aktif.key}/${id}/oylar/${kullanici.uid}`), true);
+      } catch (e) {
+        console.error("[Fikir Panosu] beğeni hatası:", e);
+        mesaj(ui.mesaj, "Beğeni kaydedilemedi, tekrar dene.");
+      } finally {
+        bekleyenOy.delete(id);
+      }
+    }
+
+    // ---------------- Fikir gönderme ----------------
+    function beklemeKalan() { return Math.max(0, depo.oku(BEKLEME_KEY, 0) + BEKLEME_MS - Date.now()); }
+    let gonderiliyor = false;
+    function beklemeGuncelle() {
+      if (!db) return;
+      const k = beklemeKalan();
+      ui.gonder.disabled = gonderiliyor || k > 0;
+      ui.gonder.textContent = k > 0 ? `⏱ ${Math.ceil(k / 1000)} sn bekle` : "🚀 Fikrimi Gönder";
+    }
+
+    function sayacYaz(input, hedef, max) {
+      const n = input.value.length;
+      hedef.textContent = n;
+      hedef.parentElement.classList.toggle("fikir-dolu", n >= max);
+    }
+
+    // ---------------- Google ile giriş ----------------
+    function hesapCiz() {
+      const girisli = !!(kullanici && kullanici.email);
+      ui.hesap.classList.toggle("fikir-girisli", girisli);
+      ui.google.querySelector("svg").style.display = girisli ? "none" : "";
+      ui.google.querySelector("span").textContent = girisli ? "Çıkış Yap" : "Google ile Giriş Yap";
+      if (girisli) ui.hesapBilgi.replaceChildren("✉ Gönderen: ", el("b", "", epostaGoster(kullanici.email, EPOSTA_GIZLE)));
+      else ui.hesapBilgi.textContent = "Fikir göndermek için Google (Gmail) hesabınla giriş yap.";
+    }
+    async function googleGiris() {
+      const saglayici = new GoogleAuthProvider();
+      saglayici.setCustomParameters({ prompt: "select_account" });
+      try {
+        await signInWithPopup(auth, saglayici);
+        mesaj(ui.mesaj, "");
+      } catch (err) {
+        const kod = err && err.code;
+        if (kod === "auth/popup-blocked" || kod === "auth/operation-not-supported-in-this-environment") return signInWithRedirect(auth, saglayici);
+        if (kod === "auth/popup-closed-by-user" || kod === "auth/cancelled-popup-request") return;
+        console.error("[Fikir Panosu] Google girişi hatası:", err);
+        mesaj(ui.mesaj, kod === "auth/unauthorized-domain" ? "Bu site Firebase'de yetkili alan olarak ekli değil." : "Google ile giriş yapılamadı.");
+      }
+    }
+    ui.google.addEventListener("click", () => {
+      if (!auth) return;
+      if (kullanici) signOut(auth); else googleGiris();
+    });
+    ui.metin.addEventListener("input", () => sayacYaz(ui.metin, ui.metinSay, METIN_MAX));
+
+    function vurgula(id) {
+      const li = liElemanlari.get(id);
+      if (!li) return;
+      li.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      li.animate?.([{ boxShadow: "0 0 0 3px #ffcf33" }, { boxShadow: "0 0 0 0 transparent" }], { duration: 1600 });
+    }
+
+    ui.form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!db || gonderiliyor) return;
+      const metin = ui.metin.value.replace(/\s+/g, " ").trim();
+
+      if (!kullanici || !kullanici.email) { mesaj(ui.mesaj, "Önce Google hesabınla giriş yap.", "fikir-bilgi"); return googleGiris(); }
+      const isim = epostaGoster(kullanici.email, EPOSTA_GIZLE);
+      if (metin.length < METIN_MIN) return mesaj(ui.mesaj, "Fikrin biraz daha uzun olmalı.");
+      if (metin.length > METIN_MAX) return mesaj(ui.mesaj, `Fikir en fazla ${METIN_MAX} karakter olabilir.`);
+      if (linkVar(metin)) return mesaj(ui.mesaj, "Link paylaşmak yasak 🚫");
+      if (kufurVar(metin)) return mesaj(ui.mesaj, "Lütfen kibar ol, uygunsuz kelime var 🙊");
+      const kalan = beklemeKalan();
+      if (kalan > 0) return mesaj(ui.mesaj, `Yeni fikir için ${Math.ceil(kalan / 1000)} saniye bekle.`, "fikir-bilgi");
+      if (!yuklendi) return mesaj(ui.mesaj, "Liste daha yükleniyor, birazdan tekrar dene.", "fikir-bilgi");
+
+      const ayni = fikirler.find((f) => benzerlik(f.metin, metin) >= BENZERLIK_ESIK);
+      if (ayni) { vurgula(ayni.id); return mesaj(ui.mesaj, "Bu fikir bu hafta zaten önerildi, listeden beğenebilirsin!", "fikir-bilgi"); }
+
+      gonderiliyor = true; beklemeGuncelle();
+      try {
+        const hafta = haftaBilgisi().key;
+        await push(ref(db, `fikirler/${hafta}`), { uid: kullanici.uid, isim, metin, begeni: 0, zaman: serverTimestamp() });
+        depo.yaz(BEKLEME_KEY, Date.now());
+        ui.metin.value = ""; sayacYaz(ui.metin, ui.metinSay, METIN_MAX);
+        mesaj(ui.mesaj, "Fikrin eklendi! Arkadaşlarına söyle, oy versinler 🎉", "fikir-ok");
+      } catch (err) {
+        console.error("[Fikir Panosu] gönderim hatası:", err);
+        mesaj(ui.mesaj, "Fikir gönderilemedi. Bağlantını kontrol edip tekrar dene.");
+      } finally {
+        gonderiliyor = false; beklemeGuncelle();
+      }
+    });
+
+    // ---------------- Haftalık devir (şampiyon belirleme) ----------------
+    function haftaSonucu(hafta, tum) {
+      const liste = Object.values(tum[hafta] || {})
+        .filter((f) => f && typeof f.metin === "string")
+        .map((f) => ({ uid: f.uid, isim: String(f.isim || "Anonim"), metin: f.metin, begeni: oySayisi(f), zaman: Number(f.zaman) || 0 }))
+        .sort(siralaFikir);
+      const ilk = liste[0];
+      const key = ilk && ilk.begeni > 0 ? yazarAnahtari(ilk) : "";
+      if (!key) return { hafta, key: null };
+      // Kazananın önceki haftalarda yazdığı kendi fikirleriyle benzerlik kontrolü
+      const tekrar = Object.keys(tum).some((h) => h < hafta && Object.values(tum[h] || {}).some((f) =>
+        f && yazarAnahtari(f) === key && benzerlik(f.metin, ilk.metin) >= BENZERLIK_ESIK));
+      return { hafta, key, isim: ilk.isim, metin: ilk.metin, begeni: ilk.begeni, tekrar };
+    }
+
+    let devirCalisiyor = false;
+    async function haftaDevri() {
+      if (!db || devirCalisiyor) return;
+      devirCalisiyor = true;
+      try {
+        const hedef = oncekiHafta(haftaBilgisi().key); // işlenmesi gereken son hafta
+        const meta0 = (await get(ref(db, "liderlikTablosu/_meta"))).val() || {};
+        if (meta0.sonIslenenHafta && meta0.sonIslenenHafta >= hedef) return;
+        const tum = (await get(ref(db, "fikirler"))).val() || {};
+        const sonuclar = Object.keys(tum).filter((h) => /^\d{4}-W\d{2}$/.test(h) && h <= hedef).sort().map((h) => haftaSonucu(h, tum));
+
+        await runTransaction(ref(db, "liderlikTablosu"), (mevcut) => {
+          const lt = mevcut || {};
+          const meta = { ...(lt._meta || {}) };
+          if (meta.sonIslenenHafta && meta.sonIslenenHafta >= hedef) return; // başka bir ziyaretçi zaten işledi
+          const kul = { ...(lt.kullanicilar || {}) };
+          const gecmis = { ...(lt._gecmis || {}) };
+          const seriSifirla = (k) => { if (k && kul[k]) kul[k] = { ...kul[k], seri: 0 }; };
+
+          for (const s of sonuclar) {
+            if (meta.sonIslenenHafta && s.hafta <= meta.sonIslenenHafta) continue;
+            const onceki = meta.sonSampiyon || null;
+            if (!s.key) { seriSifirla(onceki && onceki.key); meta.sonSampiyon = null; continue; }
+            const tekrar = s.tekrar || Object.values(gecmis).some((g) => g && g.key === s.key && g.hafta < s.hafta && benzerlik(g.metin, s.metin) >= BENZERLIK_ESIK);
+            gecmis[s.hafta] = { hafta: s.hafta, key: s.key, isim: s.isim, metin: s.metin, begeni: s.begeni, sayildi: !tekrar };
+            if (onceki && onceki.key !== s.key) seriSifirla(onceki.key);
+            if (tekrar) { seriSifirla(s.key); meta.sonSampiyon = null; continue; }
+            const k = kul[s.key] || {};
+            const devam = onceki && onceki.key === s.key && onceki.hafta === oncekiHafta(s.hafta);
+            const seri = devam ? (Number(k.seri) || 0) + 1 : 1;
+            kul[s.key] = { isim: s.isim, toplam: (Number(k.toplam) || 0) + 1, seri, enIyiSeri: Math.max(Number(k.enIyiSeri) || 0, seri), sonKazanma: s.hafta };
+            meta.sonSampiyon = { key: s.key, hafta: s.hafta };
+          }
+          // Arada boş geçen hafta(lar) olduysa seri kopar
+          if (meta.sonSampiyon && meta.sonSampiyon.hafta !== hedef) { seriSifirla(meta.sonSampiyon.key); meta.sonSampiyon = null; }
+          meta.sonIslenenHafta = hedef;
+          meta.sonIslenenSira = haftaSira(hedef);
+          return { ...lt, kullanicilar: kul, _gecmis: gecmis, _meta: meta };
+        });
+      } catch (e) {
+        console.warn("[Fikir Panosu] haftalık devir yapılamadı:", e);
+      } finally {
+        devirCalisiyor = false;
+      }
+    }
+
+    // ---------------- Liderlik tablosu ----------------
+    function liderCiz(lt) {
+      sonLider = lt;
+      const kul = Object.entries((lt && lt.kullanicilar) || {})
+        .map(([key, k]) => ({ key, isim: String(k.isim || key), toplam: Number(k.toplam) || 0, seri: Number(k.seri) || 0, enIyiSeri: Number(k.enIyiSeri) || 0 }))
+        .filter((k) => k.toplam > 0)
+        .sort((a, b) => b.toplam - a.toplam || b.seri - a.seri || b.enIyiSeri - a.enIyiSeri || a.isim.localeCompare(b.isim, "tr"));
+      if (!kul.length) bos(ui.lider, "Henüz şampiyon yok. İlk şampiyon sen ol! 👑");
+      else {
+        ui.lider.replaceChildren(...kul.map((k, i) => {
+          const li = el("li", "fikir-lider-row" + (admin ? " fikir-admin-satir" : ""));
+          li.append(
+            el("span", "fikir-madalya", ["🥇", "🥈", "🥉"][i] || String(i + 1)),
+            el("span", "fikir-lider-isim", k.isim),
+            el("span", "fikir-lider-toplam", k.toplam),
+          );
+          const seri = el("span", "fikir-seri" + (k.seri > 0 ? " fikir-yaniyor" : ""), k.seri > 0 ? `🔥 ${k.seri}` : "—");
+          seri.title = `Şu anki seri: ${k.seri} · En iyi seri: ${k.enIyiSeri}`;
+          li.append(seri);
+          li.setAttribute("aria-label", `${i + 1}. ${k.isim}, ${k.toplam} şampiyonluk, seri ${k.seri}`);
+          if (admin) {
+            const sil = el("button", "fikir-sil", "🗑");
+            sil.type = "button"; sil.title = "Liderlik tablosundan sil"; sil.setAttribute("aria-label", `${k.isim} kaydını sil`);
+            sil.addEventListener("click", () => liderSil(k.key, k.isim));
+            li.append(sil);
+          }
+          return li;
+        }));
+      }
+      const gecmis = Object.values((lt && lt._gecmis) || {}).filter((g) => g && g.hafta).sort((a, b) => (a.hafta < b.hafta ? 1 : -1));
+      const son = gecmis[0];
+      ui.sonKazanan.hidden = !son;
+      if (son) {
+        ui.sonKazanan.replaceChildren(
+          `🏁 ${son.hafta} birincisi: `, el("b", "", son.isim), ` — “${son.metin}” (${son.begeni} 👍)`,
+          ...(son.sayildi === false ? [el("br"), "⚠️ Önceki haftalardaki kendi fikrinin tekrarı olduğu için puan verilmedi."] : []),
+        );
+      }
+    }
+
+    // ---------------- Yönetici ----------------
+    function adminCubugu() {
+      let bar = $(".fikir-admin-bar", ui.ana);
+      if (admin && !bar) {
+        bar = el("div", "fikir-admin-bar");
+        const cik = el("button", "btn btn-ghost btn-sm", "Çıkış");
+        cik.type = "button";
+        cik.addEventListener("click", () => signOut(auth));
+        bar.append(el("span", "", "🛠 Yönetici modu açık: 🗑 ile kayıt silebilirsin."), cik);
+        ui.ana.prepend(bar);
+      } else if (!admin && bar) bar.remove();
+    }
+    async function fikirSil(id) {
+      const f = fikirler.find((x) => x.id === id);
+      if (!admin || !confirm(`Bu fikir silinsin mi?\n\n“${f ? f.metin : id}”`)) return;
+      try { await remove(ref(db, `fikirler/${aktif.key}/${id}`)); }
+      catch (e) { alert("Silinemedi: " + (e.code || e.message)); }
+    }
+    async function liderSil(key, isim) {
+      if (!admin || !confirm(`${isim} liderlik tablosundan tamamen silinsin mi?`)) return;
+      try { await remove(ref(db, `liderlikTablosu/kullanicilar/${key}`)); }
+      catch (e) { alert("Silinemedi: " + (e.code || e.message)); }
+    }
+
+    function modalAc() { ui.modal.hidden = false; mesaj(ui.adminMesaj, ""); ui.sifre.value = ""; setTimeout(() => ui.sifre.focus(), 30); }
+    function modalKapat() { ui.modal.hidden = true; ui.kilit.focus(); }
+    ui.kilit.addEventListener("click", () => {
+      if (!auth) return;
+      if (admin) { if (confirm("Yönetici modundan çıkılsın mı?")) signOut(auth); return; }
+      modalAc();
+    });
+    $("[data-fikir-modal-kapat]").addEventListener("click", modalKapat);
+    ui.modal.addEventListener("click", (e) => { if (e.target === ui.modal) modalKapat(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !ui.modal.hidden) modalKapat(); });
+    ui.adminForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!auth) return;
+      mesaj(ui.adminMesaj, "Kontrol ediliyor…", "fikir-bilgi");
+      try {
+        await signInWithEmailAndPassword(auth, ADMIN_EMAIL, ui.sifre.value);
+        ui.modal.hidden = true;
+      } catch (err) {
+        const kod = err && err.code;
+        mesaj(ui.adminMesaj, kod === "auth/operation-not-allowed"
+          ? "Firebase'de E-posta/Şifre girişi açık değil."
+          : kod === "auth/too-many-requests" ? "Çok fazla deneme, biraz bekle." : "Şifre yanlış.");
+      }
+    });
+
+    // ---------------- Başlat ----------------
+    if (db) {
+      onValue(ref(db, ".info/connected"), (s) => s.val() ? durum("canli", "Canlı") : durum("kopuk", "Bağlantı bekleniyor…"));
+      onValue(ref(db, "liderlikTablosu"), (s) => liderCiz(s.val()), (err) => {
+        console.error("[Fikir Panosu] liderlik okuma hatası:", err);
+        bos(ui.lider, "Liderlik tablosu okunamadı.");
+      });
+      onAuthStateChanged(auth, (u) => {
+        admin = !!u && u.email === ADMIN_EMAIL;
+        kullanici = u && u.email ? u : null;
+        hesapCiz();
+        ui.kilit.classList.toggle("fikir-acik", admin);
+        ui.kilit.textContent = admin ? "🔓" : "🔒";
+        adminCubugu();
+        listeCiz();
+        if (sonLider !== undefined) liderCiz(sonLider);
+      });
+    }
+    yeniHafta();
+    sayacGuncelle();
+    setInterval(sayacGuncelle, 1000);
+  </script>
 </body>
 </html>
