@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23T22:11:30.115Z",
+  "updated": "2026-11-24T06:58:58.488Z",
   "channel": {
     "id": "UC1xdj-jNuZqtPkqr76NSEuQ",
     "title": "RSAnimasyon",
@@ -9,16 +9,16 @@
     "handle": "rsanimasyon"
   },
   "latestLong": {
-    "id": "Paz6lM9u6Nk",
-    "title": "99 Gece – Bölüm 3: Kulübenin Bodrumunda Ne Var? 🔥 | Roblox Hikayesi",
-    "published": "2026-11-23T06:00:01+00:00",
-    "views": 23
+    "id": "C0sXgVx_9_g",
+    "title": "Yeni Okul – Bölüm 2: Oda 404'ün İçinde Ne Var? 🔵 | Roblox Dizisi",
+    "published": "2026-11-24T06:00:05+00:00",
+    "views": 2
   },
   "latestShort": {
     "id": "Aw-3kXnSaIk",
     "title": "Brainrotumu Çaldılar Ama Geri Aldım 😤 #roblox #shorts",
     "published": "2026-11-23T18:00:02+00:00",
-    "views": 69
+    "views": 85
   },
   "recent": [
     {
@@ -32,15 +32,22 @@
       "id": "7Xc6zkRbVk0",
       "title": "Tower of Hell Son Katta Biri Bana Çarptı 😭 #roblox #shorts",
       "published": "2026-11-23T12:00:37+00:00",
-      "views": 143,
+      "views": 158,
       "type": "short"
     },
     {
       "id": "AyKQcSWYQlo",
       "title": "Bahçemde Dev Havuç Çıktı 🥕 Komşum Şok Oldu! #roblox #shorts",
       "published": "2026-11-23T09:00:37+00:00",
-      "views": 104,
+      "views": 108,
       "type": "short"
+    },
+    {
+      "id": "Paz6lM9u6Nk",
+      "title": "99 Gece – Bölüm 3: Kulübenin Bodrumunda Ne Var? 🔥 | Roblox Hikayesi",
+      "published": "2026-11-23T06:00:01+00:00",
+      "views": 23,
+      "type": "long"
     },
     {
       "id": "evKryS4JMEw",
@@ -54,13 +61,6 @@
       "title": "24 Saatte Sıfırdan Roblox Oyunu Yaptım ☕ | Kahve Kaçışı",
       "published": "2026-11-20T06:00:27+00:00",
       "views": 37,
-      "type": "long"
-    },
-    {
-      "id": "3gk2XFCXpBc",
-      "title": "99 Gece – Bölüm 2: Ormandaki Gizemli Kulübe 🔥 | Roblox Hikayesi",
-      "published": "2026-11-19T06:00:07+00:00",
-      "views": 18,
       "type": "long"
     }
   ]
